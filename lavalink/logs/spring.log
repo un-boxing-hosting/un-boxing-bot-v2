@@ -1,0 +1,2 @@
+2020-07-29 00:01:17.145  INFO 28356 --- [XNIO-1 I/O-7] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:52435 -- CloseStatus[code=1006, reason=]
+2020-07-29 00:01:17.147  INFO 28356 --- [XNIO-1 I/O-7] lavalink.server.io.SocketContext         : Shutting down 0 playing players.

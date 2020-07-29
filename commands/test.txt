@@ -1,0 +1,12 @@
+module.exports = {
+	name: '',
+    aliases: ['', ''],
+	description: '',
+    cooldown: 5,
+    usage: '',
+    guildOnly: true,
+    args: true,
+	async execute(bot, message, args) {
+		
+	},
+};

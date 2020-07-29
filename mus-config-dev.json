@@ -1,0 +1,11 @@
+{
+    "prefix": "!",
+    "token": "NjE4OTI2NTg1NTc1MTEyNzQ0.XlbP0A.ImtXIMQiCnMngXy4H2v1VAZU2Ak",
+    "GIPHYtoken" : "dV8HoyKMQMYEpWqDu3ZCUxgp0klR7moE",
+    "y_search" : "AIzaSyBSq34tMJJ87mvAVXikzCCzMRrS4THgC1A",
+    "clientid" :"646225832607744012",
+    "gbltoken" :"XA-5aa69e97c35044b38af92fd6d2c1e82c",
+    "nodes": [
+        { "host": "localhost", "port" : 2333, "password": "youshallnotpass" }
+    ]
+    }

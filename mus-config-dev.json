@@ -1,6 +1,6 @@
 {
     "prefix": "!",
-    "token": "token1",
+    "token": "${{ secrets.tocken1 }}",
     "GIPHYtoken" : "dV8HoyKMQMYEpWqDu3ZCUxgp0klR7moE",
     "y_search" : "AIzaSyBSq34tMJJ87mvAVXikzCCzMRrS4THgC1A",
     "clientid" :"646225832607744012",

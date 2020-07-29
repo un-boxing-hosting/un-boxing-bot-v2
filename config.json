@@ -1,0 +1,11 @@
+{
+    "prefix": "!",
+    "token": "your-token-hear",
+    "GIPHYtoken" : "your-token-hear",
+    "y_search" : "your-token-hear",
+    "clientid" :"your-token-hear",
+    "gbltoken" :"your-token-hear",
+    "nodes": [
+        { "host": "localhost", "port" : 2333, "password": "youshallnotpass" }
+    ]
+    }

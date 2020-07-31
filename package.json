@@ -22,6 +22,7 @@
     "m3u8stream": "^0.6.3",
     "mysql": "^2.17.1",
     "node-fetch": "^2.6.0",
+    "node-teamspeak-api": "^1.0.0",
     "nodemon": "^2.0.4",
     "overwatch-api": "^0.8.2",
     "r6api.js": "^1.3.0",

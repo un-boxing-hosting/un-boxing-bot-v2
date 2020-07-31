@@ -144,7 +144,7 @@ client.on('message', async message => {
     const serverQueue = queue.get(message.guild.id);
     const args = message.content.slice(prefix.length).split(/ +/);
 	const command = message.content.toLocaleLowerCase();
-	const admin = message.author.id = ("376540589669351424");
+	//const admin = message.author.id = ("376540589669351424");
 	//my id 376540589669351424 allt id "664910416463396880"
 	const mention = message.mentions.users.first();
 	const Member = message.member;
@@ -337,7 +337,7 @@ client.on('message', async message => {
 		
 
 	} else if (message.content.startsWith(`${prefix}car`)){
-		if (!admin) return;
+		
 					   
 			 // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
 			 // To get the "message" itself we join the `args` back into a string with spaces: 

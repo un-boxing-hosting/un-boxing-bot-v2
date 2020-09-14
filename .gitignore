@@ -1,6 +1,5 @@
 node_modules
 old
-dro.js
 dro,config.json
 mus-config.json
 mus-config-dev.json
@@ -8,3 +7,4 @@ Mystic-config.json
 Mystic-bot.js
 Mystic-bot.zip
 dro-bot.zip
+dro-bot - Copy.zip

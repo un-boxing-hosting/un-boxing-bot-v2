@@ -358,7 +358,7 @@ client.on('message', async message => {
 	} else if (message.content.startsWith(`${prefix}hi`)){
 		const guild = message.guild;
 		var roles = guild.roles;
-		const role = guild.roles.cache.find(role => role.name === 'Ruby Rank');
+		const role = guild.roles.cache.find(role => role.name === 'pog role');
           const member = message.mentions.members.first();
 		  member.roles.add(role);
 		  message.channel.send(`hi`)
@@ -366,7 +366,7 @@ client.on('message', async message => {
 	} else if (message.content.startsWith(`${prefix}no`)){
 			const guild = message.guild;
 			var roles = guild.roles;
-			const role = guild.roles.cache.find(role => role.name === 'Ruby Rank');
+			const role = guild.roles.cache.find(role => role.name === 'pog role');
 			  const member = message.mentions.members.first();
 			  member.roles.remove(role);
 			  message.channel.send(`ok`)

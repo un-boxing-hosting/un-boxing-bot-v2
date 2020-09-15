@@ -1,5 +1,7 @@
 node_modules
 old
+lavalink
+lavalink/logs
 dro,config.json
 mus-config.json
 mus-config-dev.json

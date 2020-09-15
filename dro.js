@@ -87,9 +87,9 @@ client.on(`message`, async messagepog => {
       m.react('potato');
 
   } else {
-    //const m = await messagepog.channel.send(`champ ${reply}`);
-    //m.react(messagepog.guild.emojis.cache.get('755199656883126363'));
-    //messagepog.react(messagepog.guild.emojis.cache.get('755199656883126363'));
+    const m = await messagepog.channel.send(`champ ${reply}`);
+    m.react(messagepog.guild.emojis.cache.get('755199656883126363'));
+    messagepog.react(messagepog.guild.emojis.cache.get('755199656883126363'));
   }
 }
 });

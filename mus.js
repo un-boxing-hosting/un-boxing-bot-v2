@@ -12,8 +12,8 @@ const bot = new Discord.Client();
 const ytdl = require('ytdl-core');
 const ffmpeg = require('ffmpeg');
 const client = new Discord.Client();
-const GphApiClient = require('giphy-js-sdk-core');
-const Giphy = GphApiClient(GIPHYtoken);
+const Gac = require('giphy-js-sdk-core');
+const Giphy = Gac(GIPHYtoken);
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
@@ -75,14 +75,13 @@ client.once('ready', () => {
 });
 
 client.on("ready", () => {
-	// This event will run if the bot starts, and logs in, successfully.
-	console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
-	// Example of changing the bot's playing game to something useful. `client.user` is what the
-	// docs refer to as the "ClientUser".
-
-	//client.user.setActivity(`Serving ${client.guilds.size} servers`);
+	console.log('Ready!');
+	client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' })
+  .then(presence => console.log(`Activity set to "${prefix}" for help `))
+  .catch(console.error);
+  console.log(`Bot has started, with ${bot.users.cache.size} users, in ${bot.channels.cache.size} channels of ${bot.guilds.cache.size} guilds.`);
   });
-  
+
   client.on("guildCreate", guild => {
 	// This event triggers when the bot joins a guild.
 	console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
@@ -94,6 +93,7 @@ client.on("ready", () => {
 	console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
 	client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' });
   });
+
 client.once('reconnecting', () => {
 	console.log('Reconnecting!');
 });
@@ -102,12 +102,7 @@ client.once('disconnect', () => {
 	console.log('Disconnect!');
 });
 
-client.on('message', async dmmessage => {
-	if (dmmessage.channel.type === 'dm'){
-		const dms = dmmessage.content;
-		console.log(`message ${dms} sent by ${dmmessage.author.tag} in dm`)
-	}
-});
+
 
 client.on('message', async dmmessage => {
     
@@ -133,7 +128,8 @@ client.on('message', async dmmessage => {
         .setTimestamp()
         .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/unboxingman%20logo%201.1.png')
 
-       channel.send(dmEmbed)
+	   channel.send(dmEmbed)
+	   console.log(`message ${dms} sent by ${dmmessage.author.tag} in dm`)
 	}
 });
 client.on('message', async message => {

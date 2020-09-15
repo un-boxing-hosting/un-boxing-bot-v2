@@ -71,6 +71,28 @@ client.on('message',message => {
       }) 
   }
 })
+client.on(`message`, async messagepog => {
+  //if (messagepog.author.bot) return;
+  const reply = messagepog.author
+  const mention = messagepog.mentions.users.first();
+
+  if(messagepog.content.includes("pog")){
+
+    if(messagepog.content.includes(mention)) {
+      //mention.send('champ');
+      message.delete();
+      //mentionmessage.slice(mention);
+      const m = await mention.send(`reeeeeeeee`);
+      messagepog.channel.send("done!");
+      m.react('potato');
+
+  } else {
+    //const m = await messagepog.channel.send(`champ ${reply}`);
+    //m.react(messagepog.guild.emojis.cache.get('755199656883126363'));
+    //messagepog.react(messagepog.guild.emojis.cache.get('755199656883126363'));
+  }
+}
+});
 
 
 client.on('message', message => {
@@ -93,6 +115,33 @@ client.on('message', message => {
              message.channel.send('error potato');
            }) 
      }
+     if (message.content.startsWith(`${prefix}say`)){ 
+      if (message.member.hasPermission( 'MANAGE_MESSAGES', { checkAdmin:true, checkOwner: true })){
+           
+         // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
+         // To get the "message" itself we join the `args` back into a string with spaces: 
+         //var sayMessage = args.join(" ");
+         var messagesay = message.content;
+           var sayMessage= messagesay.substr('5');
+         // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
+         message.delete().catch(O_o=>{}); 
+         // And we get the bot to say the thing: 
+         message.channel.send(sayMessage);
+         console.log(sayMessage ,"sent by" ,message.author.tag,"in channel ", message.channel.name, "in guild", message.guild.name)
+      } else {
+        message.channel.send('you need to have `MANAGE_MESSAGES`')
+      }
+     }
+     const mention = message.mentions.users.first();
+     if (message.content.startsWith(`${prefix}dm`)){
+      const mentionmessage = message.content.slice(5);
+      if(mention == null) { return; }
+      message.delete();
+      mentionmessage.slice(mention);
+      mention.send(mentionmessage);
+      message.channel.send("done!")
+  
+    }
 })
 
 client.on('message', message => { 

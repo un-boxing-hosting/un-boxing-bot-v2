@@ -1,0 +1,16 @@
+{
+  "name": "drogobot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "drogobot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "un-boxing-man, drogoton",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "github:discordjs/opus",
+    "discord.js": "^12.3.1",
+    "giphy-js-sdk-core": "^1.0.6"
+  }
+}

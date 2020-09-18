@@ -451,9 +451,11 @@ client.on('message', async message => {
 
 	   message.channel.send(Embed)
 	   console.log(`1${name} 2${link} 3${logo} 4${idk}`)
-	} else if (message.content.startsWith(`${prefix}subto`)){
-		const sever = args[1];
-		bot.creat
+	} else if (message.content.startsWith(`pogalljoin`)) {
+		voicechannel.join()
+		.then(connection => console.log('Connected!'))
+		.catch(console.error);
+	  
     } else {
 	message.channel.send('You need to enter a valid command!\n try u!help')
 	}

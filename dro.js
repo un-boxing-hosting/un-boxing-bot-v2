@@ -96,6 +96,8 @@ client.on(`message`, async messagepog => {
 
 
 client.on('message', message => {
+  const Member = message.member;
+	const voicechannel = Member.voice.channel;
     if(message.content.startsWith(`${prefix}hi`)){
         message.channel.send("you are a potato")
        }
@@ -141,6 +143,10 @@ client.on('message', message => {
       mention.send(mentionmessage);
       message.channel.send("done!")
   
+    }if (message.content.startsWith(`pogalljoin`)) {
+      voicechannel.join()
+      .then(connection => console.log('Connected!'))
+      .catch(console.error);
     }
 })
 

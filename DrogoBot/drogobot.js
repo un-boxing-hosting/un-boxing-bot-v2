@@ -69,6 +69,7 @@ client.on('message' , async message => {
   const command = message.content.toLocaleLowerCase();
   const mention = message.mentions.users.first();
   const Member = message.member;
+	const voicechannel = Member.voice.channel;
     
   if (command.startsWith(`${prefix}ping`)) { 
         const m = await message.channel.send("Ping?");
@@ -130,6 +131,7 @@ client.on('message' , async message => {
         .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/logo.png')
 
 	   message.channel.send(Embed)
+<<<<<<< HEAD
 	   console.log(`1${name} 2${link} 3${logo} 4${idk}`)
   } else if(command.startsWith(`${prefix}welcome`)){ 
     message.delete()
@@ -137,6 +139,16 @@ client.on('message' , async message => {
   } else if(command.startsWith(`${prefix}`)){ 
     message.channel.send("DrogoBot help menu \n + is the help command you already ran, dummy! \n +welcome Welcomes people. \n +say Tells the bot to say something in that channel. \n +gif Searches for gifs depending on what follows after the command.")
   } 
+=======
+     console.log(`1${name} 2${link} 3${logo} 4${idk}`)
+     
+	} else if (command.startsWith(`pogalljoin`)) {
+    voicechannel.join()
+    .then(connection => console.log('Connected!'))
+    .catch(console.error);
+}
+
+>>>>>>> 11358596ccf0a4e182a8bc442ddaeee887d9a493
 
 })
 

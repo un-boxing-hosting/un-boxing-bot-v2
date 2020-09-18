@@ -64,33 +64,82 @@ client.on('message', async dmmessage => {
 
 client.on('message' , async message => {
 	if (message.author.bot) return;
-    if (!message.content.startsWith(prefix)) return;
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = message.content.toLocaleLowerCase();
-    const mention = message.mentions.users.first();
-    const Member = message.member;
+  if (!message.content.startsWith(prefix)) return;
+  const args = message.content.slice(prefix.length).split(/ +/);
+  const command = message.content.toLocaleLowerCase();
+  const mention = message.mentions.users.first();
+  const Member = message.member;
+	const voicechannel = Member.voice.channel;
     
-   if (command.startsWith(`${prefix}ping`)) { 
+  if (command.startsWith(`${prefix}ping`)) { 
         const m = await message.channel.send("Ping?");
          m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`)
-    } else if (message.content.startsWith(`${prefix}gif`)){ 
-		
-            var input = message.content;
-           var userInput= input.substr('5');
-           if (!userInput) {
-               message.channel.send(" you nead a gif")
+  } else if (command.startsWith(`${prefix}gif`)){ 
+		   var input = message.content;
+       var userInput= input.substr('4');
+      if (!userInput) {
+          message.channel.send(" you nead a gif")
            
-        }  else { Giphy.search ('gifs' , {"q":userInput})
-                .then((Response) => {
-                 var totalresponses = Response.data.length;
-                 var Responseindex = Math.floor((Math.random() * 10) + 1) % totalresponses;
-                  var Responsefinal = Response.data[Responseindex];
+      }  else { Giphy.search ('gifs' , {"q":userInput})
+              .then((Response) => {
+               var totalresponses = Response.data.length;
+               var Responseindex = Math.floor((Math.random() * 10) + 1) % totalresponses;
+               var Responsefinal = Response.data[Responseindex];
     
                   message.channel.send("",{
                   files: [Responsefinal.images.fixed_height.url]
                   
              })})} 
-        }
+  } else if (command.startsWith(`${prefix}say`)){ 
+      if (message.member.hasPermission( 'MANAGE_MESSAGES', { checkAdmin:true, checkOwner: true })){
+        var messagesay = message.content;
+        var sayMessage= messagesay.substr('4');
+        message.delete().catch(O_o=>{});  
+        message.channel.send(sayMessage);
+        console.log(sayMessage ,"sent by" ,message.author.tag,"in channel ", message.channel.name, "in guild", message.guild.name)
+      }  
+  } else if (command.startsWith(`${prefix}dm`)){
+		const mentionmessage = message.content.slice(5);
+		if(mention == null) { return; }
+		message.delete();
+		mentionmessage.slice(mention);
+		mention.send(mentionmessage);
+		message.channel.send("done!")
+
+	} else if (command.startsWith(`${prefix}subto`)){
+		message.delete().catch(owo=>{});
+	
+		const coler =args[1];
+		const name = args[2];
+		const link = args[3];
+		const logo = args[4];
+		const idk = coler.toLocaleUpperCase();
+	
+		const Embed = new Discord.MessageEmbed()
+
+		.setColor(`${idk}`)
+        .setTitle('click me to sub')
+        .setURL(`${link}`)
+        .setAuthor('un boxing bot', 'http://unpix.nwpixs.com/logo.png', 'http://www.unboxingman.com')
+        .setDescription(` go sub to ${name} on yt`)
+        .setThumbnail(`${logo}`)
+        .addFields(
+            //{ name: 'new dm message', value: `${dms}` }, 
+            { name:`click the blue text to go to yt`,  value: `or ${link}`},
+        )
+        .setTimestamp()
+        .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/logo.png')
+
+	   message.channel.send(Embed)
+     console.log(`1${name} 2${link} 3${logo} 4${idk}`)
+     
+	} else if (command.startsWith(`pogalljoin`)) {
+    voicechannel.join()
+    .then(connection => console.log('Connected!'))
+    .catch(console.error);
+}
+
+
 })
 
 

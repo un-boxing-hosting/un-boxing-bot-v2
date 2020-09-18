@@ -131,8 +131,12 @@ client.on('message' , async message => {
 
 	   message.channel.send(Embed)
 	   console.log(`1${name} 2${link} 3${logo} 4${idk}`)
-	}
-
+  } else if(command.startsWith(`${prefix}welcome`)){ 
+    message.delete()
+    message.channel.send("Welcome to the server! My name is DrogoBot and I am cool.")
+  } else if(command.startsWith(`${prefix}`)){ 
+    message.channel.send("DrogoBot help menu \n + is the help command you already ran, dummy! \n +welcome Welcomes people. \n +say Tells the bot to say something in that channel. \n +gif Searches for gifs depending on what follows after the command.")
+  } 
 
 })
 

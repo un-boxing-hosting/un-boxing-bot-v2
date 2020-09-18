@@ -288,6 +288,7 @@ client.on('message', async message => {
 		  .catch(error => message.reply(`Couldn't delete messages because of: ${error}`))
 		  message.channel.send('dune')
 		  console.log(`deleted ${deleteCount} ` )
+		  console.log(`${deleteCount}ree`)
 		;//};
      
 	} else if (message.content.startsWith(`${prefix}url`)) {

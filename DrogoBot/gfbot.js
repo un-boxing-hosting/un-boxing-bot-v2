@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix, token, GIPHYtoken, channelID } =require(`./drogobotgf-config.json`);
+const { prefix, token, GIPHYtoken, channelID } =require(`./gfbot-config.json`);
 const client = new Discord.Client();
 const bot = new Discord.Client();
 const gac = require('giphy-js-sdk-core');
@@ -7,8 +7,8 @@ const Giphy = gac(GIPHYtoken);
 
 client.on("ready", () => {
 	console.log('Ready!');
-	client.user.setActivity(`DrogoBot sleep.`, { type: 'WATCHING' })
-  .then(presence => console.log(`Activity set to DrogoBot sleep.`))
+	client.user.setActivity(`with you uwu`, { type: 'PLAYING' })
+  .then(presence => console.log(`Activity set to Girlfriend bot, at your service!`))
   .catch(console.error);
   console.log(`Bot has started, with ${bot.users.cache.size} users, in ${bot.channels.cache.size} channels of ${bot.guilds.cache.size} guilds.`);
   });
@@ -45,11 +45,11 @@ client.on('message', async dmmessage => {
         const dmEmbed = new Discord.MessageEmbed()
         
         .setColor('GREEN')
-      .setTitle('new DM')
+      .setTitle('Someone is in my DMs uwu')
       .setURL('http://dro.unboxingman.com')
-      .setAuthor('drogobot', 'http://play.unboxingman.com/dro/DrogoLogo.png', 'http://dro.unboxingman.com')
+      .setAuthor('Drogoton, un boxing man yt', 'http://play.unboxingman.com/dro/DrogoLogo.png', 'http://dro.unboxingman.com')
       .setDescription(` Received: ${dms}`)
-      .setThumbnail('http://play.unboxingman.com/dro/DrogoLogo.png')
+      .setThumbnail('https://cdn.discordapp.com/avatars/755089837836599377/3c223555b4a2db7bfc3c1f18adcfbc8e.webp?size=2048')
       .addFields(
           //{ name: 'new dm message', value: `${dms}` }, 
           { name:`by ${dmauthor}`,  value: `.`},
@@ -106,40 +106,7 @@ client.on('message' , async message => {
 		mention.send(mentionmessage);
 		message.channel.send("done!")
 
-	} else if (command.startsWith(`${prefix}subto`)){
-		message.delete().catch(owo=>{});
-	
-		const coler =args[1];
-		const name = args[2];
-		const link = args[3];
-		const logo = args[4];
-		const idk = coler.toLocaleUpperCase();
-	
-		const Embed = new Discord.MessageEmbed()
-
-		.setColor(`${idk}`)
-        .setTitle('click me to sub')
-        .setURL(`${link}`)
-        .setAuthor('un boxing bot', 'http://unpix.nwpixs.com/logo.png', 'http://www.unboxingman.com')
-        .setDescription(` go sub to ${name} on yt`)
-        .setThumbnail(`${logo}`)
-        .addFields(
-            //{ name: 'new dm message', value: `${dms}` }, 
-            { name:`click the blue text to go to yt`,  value: `or ${link}`},
-        )
-        .setTimestamp()
-        .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/logo.png')
-
-	   message.channel.send(Embed)
-     console.log(`1${name} 2${link} 3${logo} 4${idk}`)
-     
-	} else if (command.startsWith(`pogalljoin`)) {
-    voicechannel.join()
-    .then(connection => console.log('Connected!'))
-    .catch(console.error);
-}
-
-
+	} 
 })
 
 

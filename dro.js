@@ -1,9 +1,25 @@
 const discord = require('discord.js');
 const { prefix, token, GIPHYtoken, channelID } = require('./dro,config.json');
 const client = new discord.Client();
+const Enmap = require('enmap');
 
 var GphApiClient = require('giphy-js-sdk-core')
 Giphy = GphApiClient(GIPHYtoken)
+
+client.settings = new Enmap({
+  name: "settings",
+  fetchAll: false,
+  autoFetch: true,
+  cloneLevel: 'deep'
+});
+const defaultSettings = {
+  prefix: "!",
+  modLogChannel: "mod-log",
+  modRole: "Moderator",
+  adminRole: "Administrator",
+  welcomeChannel: "welcome",
+  welcomeMessage: "Say hello to {{user}}, everyone!"
+}
 
 client.once('ready', () => {
 console.log('ready!')
@@ -24,6 +40,31 @@ client.on('message', async dmmessage => {
 		const dms = dmmessage.content;
 		console.log(`message ${dms} sent by ${dmmessage.author.tag} in dm`)
 	}
+});
+client.on("guildDelete", guild => {
+  // When the bot leaves or is kicked, delete settings to prevent stale entries.
+  client.settings.delete(guild.id);
+});
+
+client.on("guildMemberAdd", member => {
+  // This executes when a member joins, so let's welcome them!
+
+  // First, ensure the settings exist
+  client.settings.ensure(member.guild.id, defaultSettings);
+
+  // First, get the welcome message using get: 
+  let welcomeMessage = client.settings.get(member.guild.id, "welcomeMessage");
+
+  // Our welcome message has a bit of a placeholder, let's fix that:
+  welcomeMessage = welcomeMessage.replace("{{user}}", member.user.tag)
+
+  // we'll send to the welcome channel.
+  var ch = member.guild.channels.resolve("name", client.settings.get(member.guild.id, "welcomeChannel")).
+  member.guild.channels
+    //.resolve("name", client.settings.get(member.guild.id, "welcomeChannel"))
+    //ch. . send(welcomeMessage)
+    
+    .catch(console.error);
 });
 
 client.on('message', async dmmessage => {
@@ -52,6 +93,65 @@ if (dmmessage.channel.type === 'dm'){
 
      channel.send(dmEmbed)
 }
+});
+client.on("message", async (message) => {
+  // This stops if it's not a guild (obviously), and we ignore all bots.
+  // Pretty standard for any bot.
+  if(!message.guild || message.author.bot) return;
+
+  // We can use ensure() to actually grab the default value for settings,
+  // if the key doesn't already exist. 
+  const guildConf = client.settings.ensure(message.guild.id, defaultSettings);
+
+  // Now we can use the values! 
+  // We stop processing if the message does not start with our prefix for this guild.
+  if(message.content.indexOf(guildConf.prefix) !== 0) return;
+
+  //Then we use the config prefix to get our arguments and command:
+  const args = message.content.split(/\s+/g);
+  const command = args.shift().slice(guildConf.prefix.length).toLowerCase();
+
+  // Commands Go Here
+    // Alright. Let's make a command! This one changes the value of any key
+  // in the configuration.
+  if(command === "setconf") {
+    // Command is admin only, let's grab the admin value: 
+    const adminRole = message.guild.roles.fetch("name", guildConf.adminRole);
+    if(!adminRole) return message.reply("Administrator Role Not Found");
+
+    // Then we'll exit if the user is not admin
+    //if(!message.member.hasPermission(`MANAGE_MESSAGES`, { checkAdmin: true, checkOwner: true}) || !message.member.roles.cache.has(adminRole.id )) {
+    //  return message.reply("You're not an admin, sorry!");
+  //  }
+
+    // Let's get our key and value from the arguments. 
+    // This is array destructuring, by the way. 
+    const [prop, ...value] = args;
+    // Example: 
+    // prop: "prefix"
+    // value: ["+"]
+    // (yes it's an array, we join it further down!)
+
+    // We can check that the key exists to avoid having multiple useless, 
+    // unused keys in the config:
+    if(!client.settings.has(message.guild.id, prop)) {
+      return message.reply("This key is not in the configuration.");
+    }
+
+    // Now we can finally change the value. Here we only have strings for values 
+    // so we won't bother trying to make sure it's the right type and such. 
+    client.settings.set(message.guild.id, value.join(" "), prop);
+
+    // We can confirm everything's done to the client.
+    message.channel.send(`Guild configuration item ${prop} has been changed to:\n\`${value.join(" ")}\``);
+  }
+  if(command === "showconf") {
+    let configProps = Object.keys(guildConf).map(prop => {
+      return `${prop}  :  ${guildConf[prop]}`;
+    });
+    message.channel.send(`The following are the server's current configuration:
+    \`\`\`${configProps.join("\n")}\`\`\``);
+  }
 });
 
 client.on('message',message => {
@@ -100,6 +200,10 @@ client.on('message', message => {
 	const voicechannel = Member.voice.channel;
     if(message.content.startsWith(`${prefix}hi`)){
         message.channel.send("you are a potato")
+       }
+       if (message.content.startsWith(`${prefix}fm`)){
+         const guild = message.guild
+        client.settings.delete(guild.id);
        }
    
    if(message.content.startsWith(`${prefix}po`)){

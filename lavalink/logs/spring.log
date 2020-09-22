@@ -1,3 +1,12 @@
-2020-09-14 16:10:32.204  INFO 22004 --- [XNIO-1 task-60] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
-2020-09-14 16:10:32.692  INFO 22004 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Henry Stickmin Distraction Dance 10 Hours
-2020-09-14 16:10:32.695  INFO 22004 --- [XNIO-1 I/O-6] lavalink.server.io.SocketServer          : {"op":"play","guildId":"635528747981733958","track":"QAAAkAIAKUhlbnJ5IFN0aWNrbWluIERpc3RyYWN0aW9uIERhbmNlIDEwIEhvdXJzAA0xMEhvdXJzTW92aWVzAAAAAAIlUQAACzZYSzRTOE9RUHVVAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9NlhLNFM4T1FQdVUAB3lvdXR1YmUAAAAAAAAAAA==","volume":100}
+2020-09-20 18:08:06.507  INFO 9840 --- [XNIO-1 task-2] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55690
+2020-09-20 18:08:06.515  INFO 9840 --- [XNIO-1 task-2] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:55690
+2020-09-20 18:09:49.875  INFO 9840 --- [XNIO-1 I/O-6] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55690 -- CloseStatus[code=1006, reason=]
+2020-09-20 18:09:49.875  INFO 9840 --- [XNIO-1 I/O-6] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2020-09-20 18:09:51.776  INFO 9840 --- [XNIO-1 task-3] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55721
+2020-09-20 18:09:51.781  INFO 9840 --- [XNIO-1 task-3] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:55721
+2020-09-20 18:15:44.469  INFO 9840 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55721 -- CloseStatus[code=1006, reason=]
+2020-09-20 18:15:44.470  INFO 9840 --- [XNIO-1 I/O-13] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2020-09-20 18:15:46.766  INFO 9840 --- [XNIO-1 task-4] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55827
+2020-09-20 18:15:46.771  INFO 9840 --- [XNIO-1 task-4] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:55827
+2020-09-20 18:17:07.509  INFO 9840 --- [XNIO-1 I/O-7] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55827 -- CloseStatus[code=1006, reason=]
+2020-09-20 18:17:07.509  INFO 9840 --- [XNIO-1 I/O-7] lavalink.server.io.SocketContext         : Shutting down 0 playing players.

@@ -64,7 +64,7 @@ client.on('message', async dmmessage => {
 
 client.on('message' , async message => {
 	if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
+  //if (!message.content.startsWith(prefix)) return;
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = message.content.toLocaleLowerCase();
   const mention = message.mentions.users.first();

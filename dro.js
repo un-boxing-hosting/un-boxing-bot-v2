@@ -59,11 +59,17 @@ client.on("guildMemberAdd", member => {
   welcomeMessage = welcomeMessage.replace("{{user}}", member.user.tag)
 
   // we'll send to the welcome channel.
+<<<<<<< HEAD
+  member.guild.channels
+    .resolve("name", client.settings.get(member.guild.id, "welcomeChannel"))
+    .send(welcomeMessage)
+=======
   var ch = member.guild.channels.resolve("name", client.settings.get(member.guild.id, "welcomeChannel")).
   member.guild.channels
     //.resolve("name", client.settings.get(member.guild.id, "welcomeChannel"))
     //ch. . send(welcomeMessage)
     
+>>>>>>> master
     .catch(console.error);
 });
 

@@ -63,7 +63,7 @@ client.on('message', async dmmessage => {
 });
 
 client.on('message' , async message => {
-	if (message.author.bot) return;
+	//if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = message.content.toLocaleLowerCase();
@@ -135,10 +135,51 @@ client.on('message' , async message => {
   } else if(command.startsWith(`${prefix}welcome`)){ 
     message.delete()
     message.channel.send("Welcome to the server! My name is DrogoBot and I am cool.")
-  } else if(command.startsWith(`${prefix}`)){ 
-    message.channel.send("DrogoBot help menu \n + is the help command you already ran, dummy! \n +welcome Welcomes people. \n +say Tells the bot to say something in that channel. \n +gif Searches for gifs depending on what follows after the command.")
-  } 
+  }// else if(command.startsWith(`${prefix}`)){ 
+  //  message.channel.send("DrogoBot help menu \n + is the help command you already ran, dummy! \n +welcome Welcomes people. \n +say Tells the bot to say something in that channel. \n +gif Searches for gifs depending on what follows after the command.")
+  //}
+   else if(command.startsWith(`${prefix}activity`)){ 
+    var input = message.content;
+    var userInput= args[1]
+    var type = args[2]
+    if (!userInput) {
+      client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' })
+    }
+    if (type === `s`){
+      var type1 = `STREAMING`
+      client.user.setActivity(`gsfgsgfsdgsd`, { type: `STREAMING` })//URL: "https://www.twitch.tv/z1gaming" }) 
+      console.log(type1)
+      
+    }
+    if (type === `p`){
+      var type2 = `PLAYING`
+      client.user.setActivity(`"${userInput}`, { type: `${type2}` }) 
+    }
+    if (type === `l`){
+      var type3 = `LISTENING`
+      client.user.setActivity(`"${userInput}`, { type: `${type3}` }) 
+      
+    }
+    if (type === `w`){
+      var type4 = `WATCHING`
+      client.user.setActivity(`"${userInput}`, { type: `${type4}` }) 
+      
+    } else if (!type) {
 
+      client.user.setActivity(`"${userInput}`, { type: `CUSTOM_STATUS` }) 
+    }
+    console.log(`${userInput} ${type}`)
+  }else if(command.startsWith(`${prefix}propose`)){ 
+    message.delete()
+    message.channel.send("<@!280497242714931202>, will you marry me?")
+    console.log("It happened!")
+  }else if(command.startsWith(`${prefix}fact`)){
+    message.channel.send("<@!288484543080562688> is better than <@!376540589669351424>. That's true")
+    console.log("DrogoBot be spitting straight facts")
+  }else if(command.startsWith(`${prefix}admin`)){
+    var input = message.content;
+    var userInput= args[1]
+  }
 })
 
 client.login(token)

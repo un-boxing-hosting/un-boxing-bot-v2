@@ -195,7 +195,6 @@ client.on(`message`, async messagepog => {
 
 client.on('message', message => {
   const Member = message.member;
-	const voicechannel = Member.voice.channel;
     if(message.content.startsWith(`${prefix}hi`)){
         message.channel.send("you are a potato")
        }

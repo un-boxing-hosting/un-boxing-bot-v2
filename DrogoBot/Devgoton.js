@@ -7,8 +7,8 @@ const Giphy = gac(GIPHYtoken);
 
 client.on("ready", () => {
 	console.log('Ready!');
-	client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' })
-  .then(presence => console.log(`Activity set to "${prefix}" for help `))
+	client.user.setActivity(`"${prefix}help" for help `, { type: 'WATCHING' })
+  .then(presence => console.log(`Activity set to "${prefix}help" for help `))
   .catch(console.error);
   console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
   });
@@ -22,7 +22,7 @@ client.on("ready", () => {
   client.on("guildDelete", guild => {
 	// this event triggers when the bot is removed from a guild.
 	console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-	client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' });
+	client.user.setActivity(`"${prefix}help" for help `, { type: 'WATCHING' });
   });
 
 client.once('reconnecting', () => {
@@ -143,7 +143,7 @@ client.on('message' , async message => {
     var userInput= args[1]
     var type = args[2]
     if (!userInput) {
-      client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' })
+      client.user.setActivity(`"${prefix}help" for help `, { type: 'WATCHING' })
     }
     if (type === `s`){
       var type1 = `STREAMING`

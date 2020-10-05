@@ -135,9 +135,9 @@ client.on('message' , async message => {
   } else if(command.startsWith(`${prefix}welcome`)){ 
     message.delete()
     message.channel.send("Welcome to the server! My name is DrogoBot and I am cool.")
-  }// else if(command.startsWith(`${prefix}`)){ 
-  //  message.channel.send("DrogoBot help menu \n + is the help command you already ran, dummy! \n +welcome Welcomes people. \n +say Tells the bot to say something in that channel. \n +gif Searches for gifs depending on what follows after the command.")
-  //}
+  } else if(command.startsWith(`${prefix}help`)){ 
+    message.channel.send(" help menu \n =help is the help command you already ran, dummy! \n =welcome Welcomes people. \n =say Tells the bot to say something in that channel. \n =gif Searches for gifs depending on what follows after the command.")
+  }
    else if(command.startsWith(`${prefix}activity`)){ 
     var input = message.content;
     var userInput= args[1]

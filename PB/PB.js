@@ -33,6 +33,18 @@ client.once('disconnect', () => {
 	console.log('Disconnect!');
 });
 
+client.on('message' , async message => {
+  const command = message.content.toLocaleLowerCase();
+  if(command.includes(`niger`)){
+    message.delete()
+    message.channel.send(`${message.author} seed a no no word `)
+    message.author.send(`do not say that in thes server`)
+
+  } if (command.includes(`potato`)){
+    message.react('🥔')
+  }
+  
+})
 client.on('message', async dmmessage => {
     
     if (!dmmessage.channel.type === 'dm') return;
@@ -49,7 +61,7 @@ client.on('message', async dmmessage => {
       .setURL('http://dro.unboxingman.com')
       .setAuthor('PotatoMC Bot', 'http://play.unboxingman.com/dro/PotatoMC.png', 'http://dro.unboxingman.com')
       .setDescription(` Received: ${dms}`)
-      .setThumbnail('http://play.unboxingman.com/dro/DrogoLogo.png')
+      .setThumbnail('http://play.unboxingman.com/dro/PotatoMC.png')
       .addFields(
           //{ name: 'new dm message', value: `${dms}` }, 
           { name:`by ${dmauthor}`,  value: `.`},
@@ -67,18 +79,18 @@ client.on('message' , async message => {
   if (!message.content.startsWith(prefix)) return;
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = message.content.toLocaleLowerCase();
-  const mention = message.mentions.users.first();
+  const mention = message.mentions.members.first();
   const Member = message.member;
 	const voicechannel = Member.voice.channel;
     
   if (command.startsWith(`${prefix}ping`)) { 
         const m = await message.channel.send("Ping?");
-         m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`)
+         m.edit(`Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`)
 
   } else if (command.startsWith(`${prefix}say`)){ 
       if (message.member.hasPermission( 'MANAGE_MESSAGES', { checkAdmin:true, checkOwner: true })){
         var messagesay = message.content;
-        var sayMessage= messagesay.substr('4');
+        var sayMessage= messagesay.substr('6');
         message.delete().catch(O_o=>{});  
         message.channel.send(sayMessage);
         console.log(sayMessage ,"sent by" ,message.author.tag,"in channel ", message.channel.name, "in guild", message.guild.name)
@@ -92,7 +104,72 @@ client.on('message' , async message => {
     message.channel.send("done!")
     
   } else if(command.startsWith(`${prefix}help`)){ 
-   message.channel.send("PotatoMC Bot help menu \n +help is the help command you already ran, dummy! \n +welcome Welcomes people. \n +say Tells the bot to say something in that channel. \n +gif Searches for gifs depending on what follows after the command.")
+   message.channel.send("PotatoMC Bot help menu \n p!help is the help command you already ran, dummy! \n p!ping shows you the bot's ping.")
+  }else if (command.startsWith(`${prefix}kick`)){
+		//const mentionmessage = message.content.slice(prefix.length);
+	const reson = args[2]
+	const whokick = mention;
+	if (!message.member.hasPermission(`KICK_MEMBERS`, { checkAdmin:true, checkOwner: true })) return;
+	if (!mention){
+		message.channel.send(`pls mention a member to kick`);
+		return;
+	}
+	let authorhighestrole = message.member.roles.highest.position;
+	//let mentionrole = mention.member.roles.highest.position
+	
+	//if (!mention.kickable){
+	//	message.channel.send(`I have no premissions to kick this user`)
+	//}
+	mention.send(` you have ben kicked from ${message.guild.name} for ${reson}`)
+	mention.kick(reson)
+		.then(() => console.log(`kicked ${mention.displayName} from ${message.guild.name} for ${reson}`))
+		.catch(console.error);
+	message.channel.send(`kicked ${mention.displayName} for ${reson}`)
+	
+  }else if (command.startsWith(`${prefix}ban`)){
+	const reson = args[3]
+	const bdays = args[2]
+	const whokick = mention;
+	if (!message.member.hasPermission(`BAN_MEMBERS`, { checkAdmin:true, checkOwner: true })) return;
+	if (!mention){
+		message.channel.send(`pls mention a member to ban`);
+		return;
+	}
+	let authorhighestrole = message.member.roles.highest.position;
+	//let mentionrole = mention.member.roles.highest.position
+	
+	//if (!mention.kickable){
+	//	message.channel.send(`I have no premissions to kick this user`)
+	//}
+	mention.send(` you have ben banned from ${message.guild.name} for ${reson}`)
+	mention.ban({ days: bdays, reason: `${reson}` })
+		.then(() => console.log(`banned ${mention.displayName} from ${message.guild.name} for ${reson}`))
+		.catch(console.error);
+	message.channel.send(`banned ${mention.displayName} for ${reson}`)
+
+  }else if (command.startsWith(`${prefix}unban`)){
+	const reson = args[3]
+	const buser = args[1]
+	const whokick = mention;
+	const guild = message.guild;
+	if (!message.member.hasPermission(`BAN_MEMBERS`, { checkAdmin:true, checkOwner: true })) return;
+	if (!buser){
+		message.channel.send(`pls send a member id to unban`);
+		return;
+	}
+	//let authorhighestrole = message.member.roles.highest.position;
+	//let mentionrole = mention.member.roles.highest.position
+	
+	//if (!mention.kickable){
+	//	message.channel.send(`I have no premissions to kick this user`)
+	//}
+	//buser.send(` you have ben unbanned from ${message.guild.name} for ${reson}`)
+	guild.members.unban(buser)
+		.then(() => console.log(`unbanned ${buser} from ${message.guild.name} for ${reson}`))
+		.catch(console.error);
+	message.channel.send(`unbanned ${buser} for ${reson}`)
+  }else {
+    message.channel.send(`You need to enter a valid command!\n try ${prefix}help`)
   }
 
 })

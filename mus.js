@@ -19,6 +19,7 @@ const app = express();
 const mysql = require('mysql');
 const search = require('youtube-search');
 const GBL = require('gblapi.js');
+const { dir } = require('async');
 //const db = require('quick.db')
 
 const Glenn = new GBL(clientid , gbltoken , false, {webhookPort: 3001, webhookPath: "/GBLWebhook", webhookAuth: "un-boxing-man-is-cool"});
@@ -142,7 +143,7 @@ client.on('message', async message => {
 	const command = message.content.toLocaleLowerCase();
 	//const admin = message.author.id = ("376540589669351424");
 	//my id 376540589669351424 allt id "664910416463396880"
-	const mention = message.mentions.users.first();
+	const mention = message.mentions.members.first();
 	const Member = message.member;
 	const voicechannel = Member.voice.channel;
 	const voiceChannel = Member.voice.channel;
@@ -270,26 +271,30 @@ client.on('message', async message => {
     } else if (message.content.startsWith(`${prefix}ping`)) { 
 	     const m = await message.channel.send("Ping?");
 		  m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`)
+		  
 		
 
 	} else if (message.content.startsWith(`${prefix}delete`)) {
-		 //if (message.member.hasPermission('MANAGE_MESSAGES', { checkAdmin:true, checkOwner: true })){
+		 if (message.member.hasPermission('MANAGE_MESSAGES', { checkAdmin:true, checkOwner: true })){
     
          // get the delete count, as an actual number.
-		 const deleteCount = parseInt(args[0], 10);
-    
+		 const deleteCount = parseInt(args[1], 10);
+		 
          // Ooooh nice, combined conditions. <3
          if(!deleteCount || deleteCount < 2 || deleteCount > 100)
           return message.reply("Please provide a number between 2 and 100 for the number of messages to delete");
     
          // So we get our messages, and delete them. Simple enough, right?
-         const fetched = await message.channel.fetchMessages({limit: deleteCount});
+         const fetched = await message.channel.messages.fetch({limit: deleteCount});
           message.channel.bulkDelete(fetched)
 		  .catch(error => message.reply(`Couldn't delete messages because of: ${error}`))
-		  message.channel.send('dune')
+		  const dunemes = await message.channel.send(`dune`);
+		 //setInterval(function(){
+		//	dunemes.delete
+		 //} ,1000)
+		  
 		  console.log(`deleted ${deleteCount} ` )
-		  console.log(`${deleteCount}ree`)
-		;//};
+		};
      
 	} else if (message.content.startsWith(`${prefix}url`)) {
 		var input = message.content;
@@ -459,6 +464,69 @@ client.on('message', async message => {
 		.then(connection => console.log('Connected!'))
 		.catch(console.error);
 	  
+	}else if (message.content.startsWith(`${prefix}kick`)){
+		//const mentionmessage = message.content.slice(prefix.length);
+	const reson = args[2]
+	const whokick = mention;
+	if (!message.member.hasPermission(`KICK_MEMBERS`, { checkAdmin:true, checkOwner: true })) return;
+	if (!mention){
+		message.channel.send(`pls mention a member to kick`);
+		return;
+	}
+	let authorhighestrole = message.member.roles.highest.position;
+	//let mentionrole = mention.member.roles.highest.position
+	
+	//if (!mention.kickable){
+	//	message.channel.send(`I have no premissions to kick this user`)
+	//}
+	mention.send(` you have ben kicked from ${message.guild.name} for ${reson}`)
+	mention.kick(reson)
+		.then(() => console.log(`kicked ${mention.displayName} from ${message.guild.name} for ${reson}`))
+		.catch(console.error);
+	message.channel.send(`kicked ${mention.displayName} for ${reson}`)
+	
+}else if (message.content.startsWith(`${prefix}ban`)){
+	const reson = args[3]
+	const bdays = args[2]
+	const whokick = mention;
+	if (!message.member.hasPermission(`BAN_MEMBERS`, { checkAdmin:true, checkOwner: true })) return;
+	if (!mention){
+		message.channel.send(`pls mention a member to ban`);
+		return;
+	}
+	let authorhighestrole = message.member.roles.highest.position;
+	//let mentionrole = mention.member.roles.highest.position
+	
+	//if (!mention.kickable){
+	//	message.channel.send(`I have no premissions to kick this user`)
+	//}
+	mention.send(` you have ben banned from ${message.guild.name} for ${reson}`)
+	mention.ban({ days: bdays, reason: `${reson}` })
+		.then(() => console.log(`banned ${mention.displayName} from ${message.guild.name} for ${reson}`))
+		.catch(console.error);
+	message.channel.send(`banned ${mention.displayName} for ${reson}`)
+
+}else if (message.content.startsWith(`${prefix}unban`)){
+	const reson = args[3]
+	const buser = args[1]
+	const whokick = mention;
+	const guild = message.guild;
+	if (!message.member.hasPermission(`BAN_MEMBERS`, { checkAdmin:true, checkOwner: true })) return;
+	if (!buser){
+		message.channel.send(`pls send a member id to unban`);
+		return;
+	}
+	//let authorhighestrole = message.member.roles.highest.position;
+	//let mentionrole = mention.member.roles.highest.position
+	
+	//if (!mention.kickable){
+	//	message.channel.send(`I have no premissions to kick this user`)
+	//}
+	//buser.send(` you have ben unbanned from ${message.guild.name} for ${reson}`)
+	guild.members.unban(buser)
+		.then(() => console.log(`unbanned ${buser} from ${message.guild.name} for ${reson}`))
+		.catch(console.error);
+	message.channel.send(`unbanned ${buser} for ${reson}`)
     } else {
 	message.channel.send('You need to enter a valid command!\n try u!help')
 	}

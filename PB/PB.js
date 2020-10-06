@@ -42,6 +42,11 @@ client.on('message' , async message => {
 
   } if (command.includes(`potato`)){
     message.react('🥔')
+  }if(command.includes(`bitch`)){
+    message.delete()
+    message.channel.send(`${message.author} seed a no no word `)
+    message.author.send(`do not say that in thes server`)
+
   }
   
 })

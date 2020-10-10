@@ -2,6 +2,7 @@
   "name": "un-boxing-bot",
   "version": "2.0.0",
   "description": "un boxing bot",
+  "repository": "github:un-boxing-man/un-boxing-bot-v2",
   "main": "mus.js",
   "dependencies": {
     "@discordjs/opus": "^0.1.0",

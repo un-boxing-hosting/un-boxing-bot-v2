@@ -4,7 +4,7 @@
 const { Client, Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 const { join } = require("path");
-const { TOKEN, PREFIX } = require("./drogobot-config.json");
+const { TOKEN, PREFIX } = require("./pmb-config.json");
 
 const client = new Client({ disableMentions: "everyone" });
 
@@ -23,7 +23,7 @@ client.on("ready", () => {
   client.user.setActivity(`"${PREFIX}help" for help `, { type: 'WATCHING' })
   .then(presence => console.log(`Activity set to "${PREFIX}help" for help `))
   .catch(console.error);
-  console.log(`${client.user.username} has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
+  console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
   });
 client.on("warn", (info) => console.log(info));
 client.on("error", console.error);

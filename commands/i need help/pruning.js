@@ -1,5 +1,5 @@
 const fs = require("fs");
-const config = require("../mus-config-dev.json");
+const config = require("../drogobot-config.json");
 
 module.exports = {
   name: "pruning",
@@ -7,7 +7,7 @@ module.exports = {
   execute(message) {
     config.PRUNING = !config.PRUNING;
 
-    fs.writeFile("./mus-config-dev.json", JSON.stringify(config, null, 2), (err) => {
+    fs.writeFile("./drogobot-config.json", JSON.stringify(config, null, 2), (err) => {
       if (err) {
         console.log(err);
         return message.channel.send("There was an error writing to the file.").catch(console.error);

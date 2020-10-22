@@ -20,12 +20,28 @@ const mysql = require('mysql');
 const search = require('youtube-search');
 const GBL = require('gblapi.js');
 const { dir } = require('async');
+const { json } = require('body-parser');
+const fs = require('fs-extra');
 //const db = require('quick.db')
 
 const Glenn = new GBL(clientid , gbltoken , false, {webhookPort: 3001, webhookPath: "/GBLWebhook", webhookAuth: "un-boxing-man-is-cool"});
 
+(function(){
+var	oldlog = console.log;
+var t = new Date()
+var d = t.getDate();
+var m = t.getMonth();
+var y = t.getFullYear();
+var file = `mus-logs/logs-${`${m}-${d}-${y}`}.txt`
+//fs.createFile(file, function(err){console.log(`${err} help me`);});
+var stream = fs.createWriteStream(file, {flags: 'a'})
+console.log = function (message) {
 
+	stream.write(message + "\n")
+	oldlog.apply(console, arguments);
+};
 
+})();
 client.once('ready', () => {
 const server_count = client.guilds.size;
 
@@ -77,6 +93,13 @@ client.once('ready', () => {
 
 client.on("ready", () => {
 	console.log('Ready!');
+	var t = new Date()
+	var d = t.getDate();
+	var m = t.getMonth();
+	var y = t.getFullYear();
+//var datefull = (new Date(),  )
+var todayDate = new Date().toISOString().slice(0,10);
+	console.log(`${todayDate}`)
 	client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' })
   .then(presence => console.log(`Activity set to "${prefix}" for help `))
   .catch(console.error);
@@ -174,7 +197,7 @@ client.on('message', async message => {
 	 .setDescription('un boxing bots help menu')
 	 .setThumbnail('http://unpix.nwpixs.com/unboxingman%20logo%201.1.png')
 	 .addFields(
-		 { name: ``, value: `${prefix}play (youtube url)plays song`,},
+		 { name: `.`, value: `${prefix}play (youtube url)plays song`,},
 		 { name: `plays song`, value: `${prefix}stop`,  },
 		 { name: `stops the song`, value: `${prefix}join`,  },
 		 { name: `joins the voice channel.`, value: `${prefix}leave`,  },
@@ -194,22 +217,6 @@ client.on('message', async message => {
 	 .setTimestamp()
 	 .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/unboxingman%20logo%201.1.png')
 
-	 .setColor('#0099ff')
-	.setTitle('Some title')
-	.setURL('https://discord.js.org/')
-	.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
-	.setDescription('Some description here')
-	.setThumbnail('https://i.imgur.com/wSTFkRM.png')
-	.addFields(
-		{ name: 'Regular field title', value: 'Some value here' },
-		{ name: '\u200B', value: '\u200B' },
-		{ name: 'Inline field title', value: 'Some value here', inline: true },
-		{ name: 'Inline field title', value: 'Some value here', inline: true },
-	)
-	.addField('Inline field title', 'Some value here', true)
-	.setImage('https://i.imgur.com/wSTFkRM.png')
-	.setTimestamp()
-	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
 
 	   
 	 message.channel.send(helpEmbed)
@@ -263,7 +270,12 @@ client.on('message', async message => {
 			  message.delete().catch(O_o=>{}); 
 			  // And we get the bot to say the thing: 
 			  message.channel.send(sayMessage);
-			  console.log(sayMessage ,"sent by" ,message.author.tag,"in channel ", message.channel.name, "in guild", message.guild.name)
+			  //var file = "for-dro.txt"
+			// outputJSON(file, `${sayMessage}  sent by  ${message.author.tag} in channel   ${message.channel.name}  in guild  ${message.guild.name}`)
+			//.then(() => console.log('reeeeeeeee'))
+				
+			
+			  console.log(`${sayMessage} sent by ${message.author.tag} in channel ${message.channel.name} in guild ${message.guild.name}`)
 		 } else {
 			 message.channel.send('you need to have `MANAGE_MESSAGES`')
 		 }
@@ -275,7 +287,7 @@ client.on('message', async message => {
 		
 
 	} else if (message.content.startsWith(`${prefix}delete`)) {
-		 if (message.member.hasPermission('MANAGE_MESSAGES', { checkAdmin:true, checkOwner: true })){
+		 if (!message.member.hasPermission('MANAGE_MESSAGES', { checkAdmin:true, checkOwner: true })){
     
          // get the delete count, as an actual number.
 		 const deleteCount = parseInt(args[1], 10);
@@ -468,7 +480,10 @@ client.on('message', async message => {
 		//const mentionmessage = message.content.slice(prefix.length);
 	const reson = args[2]
 	const whokick = mention;
-	if (!message.member.hasPermission(`KICK_MEMBERS`, { checkAdmin:true, checkOwner: true })) return;
+	if (!message.member.hasPermission(`KICK_MEMBERS`, { checkAdmin:true, checkOwner: true })) {
+		message.reply(`U have no premissions to kick`)
+		return;
+	}
 	if (!mention){
 		message.channel.send(`pls mention a member to kick`);
 		return;
@@ -539,6 +554,17 @@ client.on('message', async message => {
 		// send the entire array of strings as a message
 		// by default, discord.js will `.join()` the array with `\n`
 		message.channel.send(avatarList);
+
+	}else if (message.content.startsWith(`${prefix}ty`)){
+		if (args[1] = `0`){
+			message.channel.stopTyping();
+			message.delete()
+			
+		} if(args[1] = `1`) {
+		 message.channel.startTyping();
+		 message.delete()
+		} else return;
+
     } else {
 	message.channel.send('You need to enter a valid command!\n try u!help')
 	}

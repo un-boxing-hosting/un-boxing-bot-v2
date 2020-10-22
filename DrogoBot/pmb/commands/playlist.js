@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
-const { play } = require("../../include/play");
-const { YOUTUBE_API_KEY, MAX_PLAYLIST_SIZE } = require("../drogobot-config.json");
+const { play } = require("../include/play");
+const { YOUTUBE_API_KEY, MAX_PLAYLIST_SIZE } = require("../pmb-config.json");
 const YouTubeAPI = require("simple-youtube-api");
 const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
 
@@ -10,7 +10,7 @@ module.exports = {
   aliases: ["pl"],
   description: "Play a playlist from youtube",
   async execute(message, args) {
-    const { PRUNING } = require("../drogobot-config.json");
+    const { PRUNING } = require("../pmb-config.json");
     const { channel } = message.member.voice;
 
     const serverQueue = message.client.queue.get(message.guild.id);

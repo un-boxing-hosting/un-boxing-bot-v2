@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix, token, GIPHYtoken, channelID } =require(`./pmb-config.json`);
+const { prefix, token, GIPHYtoken, channelID } =require(`./devgoton-config.json`);
 const client = new Discord.Client();
 //const bot = new Discord.Client();
 const gac = require('giphy-js-sdk-core');

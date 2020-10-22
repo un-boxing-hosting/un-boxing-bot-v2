@@ -7,8 +7,8 @@ const Giphy = gac(GIPHYtoken);
 
 client.on("ready", () => {
 	console.log('Ready!');
-	client.user.setActivity(`"${prefix}help" for help `, { type: 'WATCHING' })
-  .then(presence => console.log(`Activity set to "${prefix}help" for help `))
+	client.user.setActivity(`"${prefix}help" for help. Currently in  ${client.guilds.cache.size} servers. `, { type: 'WATCHING' })
+  .then(presence => console.log(`Activity set to "${prefix}help" for help. Currently in  ${client.guilds.cache.size} servers.`))
   .catch(console.error);
   console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
   });

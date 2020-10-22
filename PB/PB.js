@@ -7,8 +7,8 @@ const Giphy = gac(GIPHYtoken);
 
 client.on("ready", () => {
 	console.log('Ready!');
-	client.user.setActivity(`"${prefix}help" for help `, { type: 'WATCHING' })
-  .then(presence => console.log(`Activity set to "${prefix}help" for help `))
+	client.user.setActivity(`you. `, { type: 'WATCHING' })
+  .then(presence => console.log(`Activity set to Watching you. `))
   .catch(console.error);
   console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
   });
@@ -16,13 +16,13 @@ client.on("ready", () => {
   client.on("guildCreate", guild => {
 	// This event triggers when the bot joins a guild.
 	console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-	client.user.setActivity(`"${prefix} for help" `, { type: 'WATCHING' });
+	client.user.setActivity(`you. `, { type: 'WATCHING' });
   });
   
   client.on("guildDelete", guild => {
 	// this event triggers when the bot is removed from a guild.
 	console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-	client.user.setActivity(`"${prefix}help" for help `, { type: 'WATCHING' });
+	client.user.setActivity(`"you. `, { type: 'WATCHING' });
   });
 
 client.once('reconnecting', () => {
@@ -34,6 +34,10 @@ client.once('disconnect', () => {
 });
 
 client.on('message' , async message => {
+	const mention = message.mentions.members.first();
+	 if (message.content.startsWith(mention)){
+		message.channel.send(`${mention.user}`)
+	 }
   const command = message.content.toLocaleLowerCase();
   if(command.includes(`niger`)){
     message.delete()
@@ -47,7 +51,9 @@ client.on('message' , async message => {
     message.channel.send(`${message.author} seed a no no word `)
     message.author.send(`do not say that in thes server`)
 
-  }
+  }else if (command.includes(`<@376540589669351424>`)){
+	message.channel.send('<@376540589669351424>')
+	}
   
 })
 client.on('message', async dmmessage => {
@@ -108,7 +114,7 @@ client.on('message' , async message => {
 		mention.send(mentionmessage);
     message.channel.send("done!")
     
-  } else if(command.startsWith(`${prefix}help`)){ 
+  }else if(command.startsWith(`${prefix}help`)){ 
    message.channel.send("PotatoMC Bot help menu \n p!help is the help command you already ran, dummy! \n p!ping shows you the bot's ping.")
   }else if (command.startsWith(`${prefix}kick`)){
 		//const mentionmessage = message.content.slice(prefix.length);

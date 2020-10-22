@@ -1,5 +1,5 @@
 const { play } = require("../include/play");
-const { YOUTUBE_API_KEY} = require("../drogobot-config.json");
+const { YOUTUBE_API_KEY} = require("../pmb-config.json");
 const ytdl = require("ytdl-core");
 const YouTubeAPI = require("simple-youtube-api");
 const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
@@ -91,7 +91,7 @@ module.exports = {
 
     try {
       queueConstruct.connection = await channel.join();
-      await queueConstruct.connection.voice.setSelfDeaf(true);
+      await queueConstruct.connection.voice.setSelfDeaf(false);
       play(queueConstruct.songs[0], message);
     } catch (error) {
       console.error(error);

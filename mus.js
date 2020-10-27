@@ -287,7 +287,7 @@ client.on('message', async message => {
 		
 
 	} else if (message.content.startsWith(`${prefix}delete`)) {
-		 if (!message.member.hasPermission('MANAGE_MESSAGES', { checkAdmin:true, checkOwner: true })){
+		 if (message.member.hasPermission('MANAGE_MESSAGES', { checkAdmin:true, checkOwner: true })){
     
          // get the delete count, as an actual number.
 		 const deleteCount = parseInt(args[1], 10);

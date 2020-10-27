@@ -97,8 +97,20 @@ client.on('message' , async message => {
         message.delete().catch(O_o=>{});  
         message.channel.send(sayMessage);
         console.log(sayMessage ,"sent by" ,message.author.tag,"in channel ", message.channel.name, "in guild", message.guild.name)
-      }  
-  } else if (command.startsWith(`${prefix}dm`)){
+      }  else 
+      message.delete().catch(O_o=>{});
+      message.channel.send("You don't have permission to run this command.")
+      return
+  }else if (command.startsWith(`${prefix}restart`)){
+      message.channel.send('Restarting...')
+      .then(client.user.setActivity("Restarting...", { type: 'PLAYING' }))
+      .then(console.log("Restarting..."))
+      .then(msg => client.destroy())
+      .then(setTimeout(function(){ 
+        client.login(token)
+        .then(console.log("Done Restarting!"))
+     }, 5000));
+  }else if (command.startsWith(`${prefix}dm`)){
 		const mentionmessage = message.content.slice(5);
 		if(mention == null) { return; }
 		message.delete();

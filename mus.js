@@ -42,6 +42,7 @@ console.log = function (message) {
 };
 
 })();
+
 client.once('ready', () => {
 const server_count = client.guilds.size;
 

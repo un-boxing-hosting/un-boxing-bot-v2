@@ -5,6 +5,24 @@ const { Client, Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 const { join } = require("path");
 const { TOKEN, PREFIX } = require("./pmb-config.json");
+const fs = require('fs-extra');
+
+(function(){
+  var	oldlog = console.log;
+  var t = new Date()
+  var d = t.getDate();
+  var m = t.getMonth();
+  var y = t.getFullYear();
+  var file = `pmb-logs/logs-${`${m}-${d}-${y}`}.txt`
+  //fs.createFile(file, function(err){console.log(`${err} help me`);});
+  var stream = fs.createWriteStream(file, {flags: 'a'})
+  console.log = function (message) {
+  
+    stream.write(message + "\n")
+    oldlog.apply(console, arguments);
+  };
+  
+  })();
 
 const client = new Client({ disableMentions: "everyone" });
 

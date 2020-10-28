@@ -4,6 +4,24 @@ const client = new Discord.Client();
 //const bot = new Discord.Client();
 const gac = require('giphy-js-sdk-core');
 const Giphy = gac(GIPHYtoken);
+const fs = require('fs-extra');
+
+(function(){
+  var	oldlog = console.log;
+  var t = new Date()
+  var d = t.getDate();
+  var m = t.getMonth();
+  var y = t.getFullYear();
+  var file = `pb-logs/logs-${`${m}-${d}-${y}`}.txt`
+  //fs.createFile(file, function(err){console.log(`${err} help me`);});
+  var stream = fs.createWriteStream(file, {flags: 'a'})
+  console.log = function (message) {
+  
+    stream.write(message + "\n")
+    oldlog.apply(console, arguments);
+  };
+  
+  })();
 
 client.on("ready", () => {
 	console.log('Ready!');

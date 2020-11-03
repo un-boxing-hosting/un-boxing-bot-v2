@@ -11,7 +11,7 @@ const client = new Discord.Client();
 const bot = new Discord.Client();
 const Giphy = GphApiClient(GIPHYtoken);
 const cooldowns = new Discord.Collection();
-const fs = require('fs-extra');
+//const fs = require('fs-extra');
 
 (function(){
     var	oldlog = console.log;

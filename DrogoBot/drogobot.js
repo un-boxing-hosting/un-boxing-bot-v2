@@ -12,7 +12,7 @@ const fs = require('fs-extra');
   var d = t.getDate();
   var m = t.getMonth();
   var y = t.getFullYear();
-  var file = `drogo-logs/logs-${`${m}-${d}-${y}`}.txt`
+  var file = `drogo-logs/logs-${`${m}-${d}-${y}`} (main).txt`
   //fs.createFile(file, function(err){console.log(`${err} help me`);});
   var stream = fs.createWriteStream(file, {flags: 'a'})
   console.log = function (message) {
@@ -29,6 +29,32 @@ client.on("ready", () => {
   .then(presence => console.log(`Activity set to "${prefix}help" for help. Currently in  ${client.guilds.cache.size} servers.`))
   .catch(console.error);
   console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
+  });
+  client.on('messageDelete', async message => {
+    // ignore direct messages
+    if (!message.guild) return;
+    const fetchedLogs = await message.guild.fetchAuditLogs({
+      limit: 1,
+      type: 'MESSAGE_DELETE',
+    });
+    // Since we only have 1 audit log entry in this collection, we can simply grab the first one
+    const deletionLog = fetchedLogs.entries.first();
+  
+    // Let's perform a coherence check here and make sure we got *something*
+    if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
+  
+    // We now grab the user object of the person who deleted the message
+    // Let us also grab the target of this action to double check things
+    const { executor, target } = deletionLog;
+  
+  
+    // And now we can update our output with a bit more information
+    // We will also run a check to make sure the log we got was for the same author's message
+    if (target.id === message.author.id) {
+      console.log(`A message by ${message.author.tag} was deleted by ${executor.tag}.`);
+    }	else {
+      console.log(`A message by ${message.author.tag} was deleted, but we don't know by who.`);
+    }
   });
 
   client.on("guildCreate", guild => {
@@ -55,10 +81,33 @@ client.on('message', async dmmessage => {
     
     if (!dmmessage.channel.type === 'dm') return;
 	if (dmmessage.channel.type === 'dm'){
-        if (dmmessage.author.bot) return
+        if (dmmessage.author.bot) {
+          const dms = dmmessage.content;
+        const dmauthor = dmmessage.author.tag;
+        console.log(`message ${dms} sent by ${dmauthor} in dm`)
+        const channel = client.channels.cache.get(`${channelID}`)
+        const dmbEmbed = new Discord.MessageEmbed()
+        
+        .setColor('GREEN')
+      .setTitle('bot sent dm')
+      .setURL('http://dro.unboxingman.com')
+      .setAuthor('drogobot', 'http://play.unboxingman.com/dro/DrogoLogo.png', 'http://dro.unboxingman.com')
+      .setDescription(` sent: ${dms}`)
+      .setThumbnail('http://play.unboxingman.com/dro/DrogoLogo.png')
+      .addFields(
+          //{ name: 'new dm message', value: `${dms}` }, 
+          { name:`${dmauthor}`,  value: `.`},
+      )
+      .setTimestamp()
+      .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/logo.png')
+
+	   channel.send(dmbEmbed)
+	   console.log(`message ${dms} sent by ${dmmessage.author.tag} in dm`)
+	} else {
+        
         const dms = dmmessage.content;
         const dmauthor = dmmessage.author.tag;
-        //console.log(`message ${dms} sent by ${dmauthor} in dm`)
+        console.log(`message ${dms} sent by ${dmauthor} in dm`)
         const channel = client.channels.cache.get(`${channelID}`)
         const dmEmbed = new Discord.MessageEmbed()
         
@@ -77,11 +126,13 @@ client.on('message', async dmmessage => {
 
 	   channel.send(dmEmbed)
 	   console.log(`message ${dms} sent by ${dmmessage.author.tag} in dm`)
-	}
+  }
+  }
 });
 
 client.on('message' , async message => {
-	//if (message.author.bot) return;
+  if (message.author.bot) return;
+  if (message.webhookID) return;
   if (!message.content.startsWith(prefix)) return;
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = message.content.toLocaleLowerCase();
@@ -129,12 +180,13 @@ client.on('message' , async message => {
         .then(console.log("Done Restarting!"))
      }, 5000));
   }else if (command.startsWith(`${prefix}dm`)){
-		const mentionmessage = message.content.slice(5);
+		const mentionmessage = message.content.slice(4);
 		if(mention == null) { return; }
 		message.delete();
 		mentionmessage.slice(mention);
 		mention.send(mentionmessage);
-		message.channel.send("done!")
+    message.channel.send("done!")
+    console.log(`A message was sent from the bot by ${message.author.tag}. "${mentionmessage}"`)
 
 	} else if (command.startsWith(`${prefix}subto`)){
 		message.delete().catch(owo=>{});
@@ -199,16 +251,22 @@ client.on('message' , async message => {
       client.user.setActivity(`"${userInput}`, { type: `CUSTOM_STATUS` }) 
     }
     console.log(`${userInput} ${type}`)
-  }else if(command.startsWith(`${prefix}propose`)){ 
-    message.delete()
-    message.channel.send("<@!280497242714931202>, will you marry me?")
-    console.log("It happened!")
-  }else if(command.startsWith(`${prefix}fact`)){
-    message.channel.send("<@!288484543080562688> is better than <@!376540589669351424>. That's true")
-    console.log("DrogoBot be spitting straight facts")
-  }else if(command.startsWith(`${prefix}admin`)){
-    var input = message.content;
-    var userInput= args[1]
+  //}else if(command.startsWith(`${prefix}propose`)){ 
+   // message.delete()
+   // message.channel.send("<@!280497242714931202>, will you marry me?")
+  //  console.log("It happened!")
+ // }else if(command.startsWith(`${prefix}fact`)){
+  //  message.channel.send("<@!288484543080562688> is better than <@!376540589669351424>. That's true")
+   // console.log("DrogoBot be spitting straight facts")
+  //}else if(command.startsWith(`${prefix}admin`)){
+  //  var input = message.content;
+ //   var userInput= args[1]
+  }else if(command.startsWith(`${prefix}webhook`)){
+    channel.createWebhook('Webhook made by DrogoBot', {
+      avatar: 'http://dr.nwpixs.com/media/DrogoLogo.png',
+    })
+      .then(webhook => console.log(`Created webhook ${webhook}`))
+      .catch(console.error);    
   }
 })
 

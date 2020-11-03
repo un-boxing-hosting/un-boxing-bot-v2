@@ -127,6 +127,25 @@ client.once('disconnect', () => {
 	console.log('Disconnect!');
 });
 
+client.on('message' , async message => {
+	//const mention = message.mentions.members.first();
+	// if (message.content.startsWith(mention)){
+	//	message.channel.send(`${mention.user}`)
+	// }
+  const command = message.content.toLocaleLowerCase();
+ 
+  	if (command.includes(`potato`)){
+    message.react('🥔')
+  }/*if(command.includes(`gay`)){
+    message.delete()
+    message.channel.send(`${message.author} seed a no no word `)
+    message.author.send(`do not say that in thes server`)
+  }*/
+ // else if (command.includes(`<@376540589669351424>`)){
+//	message.channel.send('<@376540589669351424>')
+	//}
+  
+})
 
 
 client.on('message', async dmmessage => {
@@ -566,6 +585,32 @@ client.on('message', async message => {
 		 message.delete()
 		} else return;
 
+	}else if (message.content.startsWith(`${prefix}selfdestruct`)){
+	
+		message.channel.send(`self destructing in 10s`)
+		message.channel.send(`self destructing in 9s`)
+		message.channel.send(`self destructing in 8s`)
+		message.channel.send(`self destructing in 7s`)
+		message.channel.send(`self destructing in 6s`)
+		message.channel.send(`self destructing in 5s`)
+		message.channel.send(`self destructing in 4s`)
+		message.channel.send(`self destructing in 3s`)
+		message.channel.send(`self destructing in 2s`)
+		message.channel.send(`self destructing in 1s`)
+		message.channel.send(`self destructing in 0s`)
+		message.channel.send(`deleteing all messages`)
+		message.channel.bulkDelete(100);
+
+
+	}else if (message.content.startsWith(`${prefix}idk`)){
+		var dro = "288484543080562688"
+		var task = "708532752722690058"
+		var droo = "754398565748441318"
+		mess = message.content.slice(prefix, "idk")
+		console.log(mess)
+		//client.users.fetch(dro).then((user) => {user.send(mess)})
+		//client.users.fetch(task).then((user) => {user.send(mess)})
+		//client.users.fetch(droo).then((user) => {user.send(mess)})
     } else {
 	message.channel.send('You need to enter a valid command!\n try u!help')
 	}

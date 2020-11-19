@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const { prefix, token, GIPHYtoken, channelID } =require(`./PB-config.json`);
+const badwords = require(`./badwords.json`)
 const client = new Discord.Client();
 //const bot = new Discord.Client();
 const gac = require('giphy-js-sdk-core');
@@ -12,7 +13,7 @@ const fs = require('fs-extra');
   var d = t.getDate();
   var m = t.getMonth();
   var y = t.getFullYear();
-  var file = `pb-logs/logs-${`${m}-${d}-${y}`}.txt`
+  var file = `logs/pb-logs/logs-${`${m}-${d}-${y}`}.txt`
   //fs.createFile(file, function(err){console.log(`${err} help me`);});
   var stream = fs.createWriteStream(file, {flags: 'a'})
   console.log = function (message) {
@@ -57,7 +58,7 @@ client.on('message' , async message => {
 		message.channel.send(`${mention.user}`)
 	 }
   const command = message.content.toLocaleLowerCase();
-  if(command.includes(`niger`)){
+  if(command.includes(`${badwords}`)){
     message.delete()
     message.channel.send(`${message.author} seed a no no word `)
     message.author.send(`do not say that in thes server`)
@@ -67,12 +68,13 @@ client.on('message' , async message => {
   }if(command.includes(`bitch`)){
     message.delete()
     message.channel.send(`${message.author} seed a no no word `)
-    message.author.send(`do not say that in thes server`)
-
+	message.author.send(`do not say that in thes server`)
+  }
+/*
   }else if (command.includes(`<@376540589669351424>`)){
 	message.channel.send('<@376540589669351424>')
 	}
-  
+  */
 })
 client.on('message', async dmmessage => {
     

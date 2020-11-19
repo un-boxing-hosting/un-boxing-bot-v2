@@ -7,6 +7,7 @@ const {
 	gbltoken,
 	clientid,
 	channelID,
+	BoatsAPI,
 } = require('./mus-config.json');
 const bot = new Discord.Client();
 const ytdl = require('ytdl-core');
@@ -22,9 +23,11 @@ const GBL = require('gblapi.js');
 const { dir } = require('async');
 const { json } = require('body-parser');
 const fs = require('fs-extra');
+const BOATS = require('boats.js');
+const Boats = new BOATS(BoatsAPI);
 //const db = require('quick.db')
 
-const Glenn = new GBL(clientid , gbltoken , false, {webhookPort: 3001, webhookPath: "/GBLWebhook", webhookAuth: "un-boxing-man-is-cool"});
+//const Glenn = new GBL(clientid , gbltoken , false, {webhookPort: 3001, webhookPath: "/GBLWebhook", webhookAuth: "un-boxing-man-is-cool"});
 
 (function(){
 var	oldlog = console.log;
@@ -32,7 +35,7 @@ var t = new Date()
 var d = t.getDate();
 var m = t.getMonth();
 var y = t.getFullYear();
-var file = `mus-logs/logs-${`${m}-${d}-${y}`}.txt`
+var file = `logs/mus-logs/logs-${`${m}-${d}-${y}`}.txt`
 //fs.createFile(file, function(err){console.log(`${err} help me`);});
 var stream = fs.createWriteStream(file, {flags: 'a'})
 console.log = function (message) {
@@ -40,9 +43,12 @@ console.log = function (message) {
 	stream.write(message + "\n")
 	oldlog.apply(console, arguments);
 };
-
 })();
 
+
+ 
+
+/*
 client.once('ready', () => {
 const server_count = client.guilds.size;
 
@@ -56,6 +62,7 @@ setInterval(() => {
 
 Glenn.webhook.on("vote", vote => console.log(vote)) // Will send you the user that voted when the vote is recived.
 Glenn.webhook.on("ready", console.log) // Will console log when the webhook is online and ready to use!
+*/
 const mysqlconnect = mysql.createConnection({
 	host: '',
 	user: 'unboxingbot',
@@ -86,6 +93,7 @@ const opts = {
 
 //"${prefix}help" for help`
 client.once('ready', () => {
+
 	console.log('Ready!');
 	client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' })
   .then(presence => console.log(`Activity set to "${prefix}" for help `))
@@ -101,22 +109,38 @@ client.on("ready", () => {
 //var datefull = (new Date(),  )
 var todayDate = new Date().toISOString().slice(0,10);
 	console.log(`${todayDate}`)
-	client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' })
+	//client.user.setActivity(`🍰 happy b-day un boxing man 🍰`, { type: `WATCHING`})
+	client.user.setActivity(`"${prefix}help" for help `, { type: 'WATCHING' })
   .then(presence => console.log(`Activity set to "${prefix}" for help `))
   .catch(console.error);
-  console.log(`Bot has started, with ${bot.users.cache.size} users, in ${bot.channels.cache.size} channels of ${bot.guilds.cache.size} guilds.`);
+  console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`); 
+  Boats.postStats(client.guilds.cache.size, clientid).then(() => {
+	console.log('Successfully updated server count.')
+}).catch((err) => {
+	console.error(err)
+});
   });
 
   client.on("guildCreate", guild => {
 	// This event triggers when the bot joins a guild.
 	console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-	client.user.setActivity(`"${prefix} for help" `, { type: 'WATCHING' });
+	//client.user.setActivity(`"${prefix}help" for help `, { type: 'WATCHING' });
+	Boats.postStats(client.guilds.cache.size, clientid).then(() => {
+		console.log('Successfully updated server count.')
+	}).catch((err) => {
+		console.error(err)
+	});
   });
   
   client.on("guildDelete", guild => {
 	// this event triggers when the bot is removed from a guild.
 	console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-	client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' });
+	//client.user.setActivity(`"${prefix}help" for help `, { type: 'WATCHING' });
+	Boats.postStats(client.guilds.cache.size, clientid).then(() => {
+		console.log('Successfully updated server count.')
+	}).catch((err) => {
+		console.error(err)
+	});
   });
 
 client.once('reconnecting', () => {
@@ -152,7 +176,7 @@ client.on('message', async dmmessage => {
     
     if (!dmmessage.channel.type === 'dm') return;
 	if (dmmessage.channel.type === 'dm'){
-        if (dmmessage.author.bot) return
+        //if (dmmessage.author.bot) return
         const dms = dmmessage.content;
         const dmauthor = dmmessage.author.tag;
         //console.log(`message ${dms} sent by ${dmauthor} in dm`)
@@ -213,20 +237,25 @@ client.on('message', async message => {
 	 .setColor('GREEN')
      .setTitle('help menu')
  	 .setURL('http://www.unboxingman.com')
-	 .setAuthor('un boxing bot', 'http://unpix.nwpixs.com/unboxingman%20logo%201.1.png', 'http://www.unboxingman.com')
+	 .setAuthor('un boxing bot', 'http://play.unboxingman.com/logo.png', 'http://www.unboxingman.com')
 	 .setDescription('un boxing bots help menu')
-	 .setThumbnail('http://unpix.nwpixs.com/unboxingman%20logo%201.1.png')
+	 .setThumbnail('http://play.unboxingman.com/logo.png')
 	 .addFields(
-		 { name: `.`, value: `${prefix}play (youtube url)plays song`,},
-		 { name: `plays song`, value: `${prefix}stop`,  },
-		 { name: `stops the song`, value: `${prefix}join`,  },
-		 { name: `joins the voice channel.`, value: `${prefix}leave`,  },
-		 { name: `leaves the voice channel.`, value: `${prefix}skip`,  },
-		 { name: `(not worcking) skips the song.`, value: `${prefix}gif (the gif you want)`,  },
-		 { name: `Inline field title`, value: `${prefix}help`,  },
-		 { name: `Inline field title`, value: `Some value here`,  },
-		 //{ name: `Inline field title`, value: `Some value here`,  },
+		 //{ name: `${prefix}play `, value: `(youtube url)plays song`,},
+		 //{ name: `plays song`, value: `(not working) ${prefix}stop`,  },
+		 //{ name: `stops the song`, value: `(not working) ${prefix}join`,  },
+		// { name: `joins the voice channel.`, value: `(not working) ${prefix}leave`,  },
+		// { name: `leaves the voice channel.`, value: `(not working) ${prefix}skip`,  },
+		// { name: `(not working) skips the song.`, value: `${prefix}gif (args) (the gif you want)`,  },
+		 { name: `${prefix}help`, value: `this help memu`,  },
+		 { name: `${prefix}gif (args)`, value: `sends gifs of your choice :)`,  },
+		 { name: `more commands coming soon`, value: `:)`,  },
+		 { name: `${prefix}ping`, value: `API Latency.`,  },
+		 //{ name: `more commands coming soon`, value: `:)`,  },
+
+		 
 	 )
+	 /*
 	 .addField('u!play (you tube url)', 'plays song(you tube url).')
 	 .addField('u!stop','stops the song.')
 	 .addField('u!join', 'joins the voice channel.', true)
@@ -234,39 +263,42 @@ client.on('message', async message => {
      .addField('u!skip', 'skips the song.', true)
      .addField('u!gif (the gif you want)','gets gif of your choice')
 	 .addField(`${prefix}help`,`help menu you are here.`)
+	 */
 	 .setTimestamp()
-	 .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/unboxingman%20logo%201.1.png')
+	 .setFooter('made by un boxing man yt', 'http://play.unboxingman.com/logo.png')
 
 
 	   
 	 message.channel.send(helpEmbed)
+	 
         const helpEmbedadmin = new Discord.MessageEmbed()
 	 .setColor('red')
      .setTitle('admin help menu')
- 	 .setURL('http://www.unboxingman.com')
-	 .setAuthor('un boxing bot', 'http://unpix.nwpixs.com/unboxingman%20logo%201.1.png', 'http://www.unboxingman.com')
+ 	 .setURL('http://play.unboxingman.com')
+	 .setAuthor('un boxing bot', 'http://play.unboxingman.com/logo.png', 'http://play.unboxingman.com')
 	 .setDescription('un boxing bots admin help menu ')
-	 .setThumbnail('http://unpix.nwpixs.com/unboxingman%20logo%201.1.png')
-	 .addField('u!say (what you want to say)', 'says what you said')
-	 .addField('u!ping','API Latency.')
-	 .addField('u!delete (#)', 'deletes the number of messages.', true)
-	 //.addField('!leave', 'leaves the voice channel.', true)
-     //.addField('!skip', 'skips the song.', true)
-     //.addField('!gif (the gif you want)','gets gif of your choice')
-	 //.addField('!help','help menu you are hear.')
+	 .setThumbnail('http://play.unboxingman.com/logo.png')
+	 .addField('${prefix}say (what you want to say as the bot)', 'says what you said')
+	 //.addField('${prefix}ping','API Latency.')
+	 .addField(`${prefix}delete (#) `,'deletes the number of messages.')
+	 .addField(`${prefix}kick (person to kick)`, 'kick someone.', )
+	 .addField(`${prefix}ban (person to ban)`, 'ban someone.', true)
+     .addField(`${prefix}unban (person to unban)`, 'unban someone.', true)
+     
+	 //.addField(`${prefix}help'`,'help menu you are hear.')
 	 .setTimestamp()
-	 .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/unboxingman%20logo%201.1.png');
+	 .setFooter('made by un boxing man yt', 'http://play.unboxingman.com/logo.png');
 	 
-	 
+	 if (message.member.hasPermission(`MANAGE_MESSAGES`, { checkAdmin:true, checkOwner: true })){
 	 message.author.send(helpEmbedadmin)
-	
+	 };
 
     } else if (message.content.startsWith(`${prefix}gif`)){ 
 		
         var input = message.content;
 	   var userInput= input.substr('5');
 	   if (!userInput) {
-		   message.channel.send(" you nead a gif")
+		   message.channel.send(" you need to send args")
 	   
 	}  else { Giphy.search ('gifs' , {"q":userInput})
             .then((Response) => {
@@ -607,10 +639,111 @@ client.on('message', async message => {
 		var task = "708532752722690058"
 		var droo = "754398565748441318"
 		mess = message.content.slice(prefix, "idk")
+		messs = `reeeeeeeeee`
 		console.log(mess)
-		//client.users.fetch(dro).then((user) => {user.send(mess)})
-		//client.users.fetch(task).then((user) => {user.send(mess)})
-		//client.users.fetch(droo).then((user) => {user.send(mess)})
+		client.users.fetch(dro).then((user) => {user.send(messs)})
+		client.users.fetch(task).then((user) => {user.send(messs)})
+		client.users.fetch(droo).then((user) => {user.send(messs)})
+	}else if (message.content.startsWith(`${prefix}poop`)){
+		if (!message.member.hasPermission(`MANAGE_MESSAGES`, { checkAdmin: false, checkOwner: false}) || message.member.roles.cache.has(`766892550170214400`)){
+			message.reply(`no perm`)
+			.then (console.log(`no perm`))
+			return
+		}
+		message.reply(`yes perm`)
+			.then (console.log(`yes perm`))
+
+	} else if(message.content.startsWith(prefix + `spam`)){
+		if (!message.author.id === `376540589669351424` || !message.author.id === `288484543080562688`) return;
+		var amount = args[2] 
+		 spam(message,amount)
+		 message.guild.roles.fetch
+	
+	} else if (message.content.startsWith(`${prefix}zip`)){
+		if (!message.member.voice.channel) return;
+		var connection = await message.member.voice.channel.join()
+			connection.play('./mus/zip.mp3')
+			.on(`error`, error => {
+				console.log(Error)
+			})
+			.once(`finish`, end =>{
+				//https://www.youtube.com/watch?v=lw7nKebW1UQ
+				message.member.voice.channel.leave()
+			}) 
+	
+	} else if (message.content.startsWith(`${prefix}potato`)){
+		if (!message.member.voice.channel) return;
+		var connection = await message.member.voice.channel.join()
+			connection.play('./mus/potato.mp3')
+			.on(`error`, error => {
+				console.log(Error)
+			})
+			.once(`finish`, end =>{
+				
+				message.member.voice.channel.leave()
+			}) 
+		} else if (message.content.startsWith(`${prefix}y`)){
+			if (!message.member.voice.channel) return;
+			var connection = await message.member.voice.channel.join()
+				connection.play('./mus/y.mp4')
+				.on(`error`, error => {
+					console.log(Error)
+				})
+				.once(`finish`, end =>{
+					
+					message.member.voice.channel.leave()
+				}) 
+	} else if (message.content.startsWith(`${prefix}vid`)){
+		var arg1 = args[1];
+		var arg2 = args[2]
+		var vidurl = await ytdl.getURLVideoID(arg1)
+		
+		ytdl(arg1, { filter: format => format.container === 'mp4' })
+       .pipe(fs.createWriteStream(`./mus/${arg2}.mp3`));
+		//https://www.youtube.com/watch?v=lw7nKebW1UQ
+		message.channel.send(`vid ${vidurl} saveed as ${arg2}.mp3`)
+		console.log(`new vid saved by ${message.author.tag} url ${vidurl} named ${arg2}.mp3`)
+		console.log(`https://www.youtube.com/watch?v=`+ vidurl)
+
+	} else if (message.content.startsWith(`${prefix}drostop`)){
+		if (message.author.id === `288484543080562688`) {
+			message.react(`🛑`)
+			message.reply(`you cant stop your serlf `)
+			return;
+		}
+		if (!message.member.voice.channel) return;
+		var connection = await message.member.voice.channel.join()
+			connection.play('./mus/stop.mp3')
+			.on(`error`, error => {
+				console.log(Error)
+			})
+			.once(`finish`, end =>{
+				
+				message.member.voice.channel.leave()
+			}) 
+	}else if (message.content.startsWith(`${prefix}Choose`)){
+		if (!message.member.voice.channel) return;
+		var connection = await message.member.voice.channel.join()
+			connection.play('./mus/Please_Dont_Make_Me_Choose.mp3')
+			.on(`error`, error => {
+				console.log(Error)
+			})
+			.once(`finish`, end =>{
+				
+				message.member.voice.channel.leave()
+			}) 
+	}else if (message.content.startsWith(`${prefix}fplay`)){
+		if (!message.member.voice.channel) return;
+		var arg1 = args[1]
+		var connection = await message.member.voice.channel.join()
+			connection.play(`./mus/${arg1}.mp3`)
+			.on(`error`, error => {
+				console.log(Error)
+			})
+			.once(`finish`, end =>{
+				
+				message.member.voice.channel.leave()
+			}) 
     } else {
 	message.channel.send('You need to enter a valid command!\n try u!help')
 	}
@@ -693,15 +826,61 @@ client.on('message', async message => {
 			 // And we get the bot to say the thing: 
 			 message.channel.send(sayMessage)};
 			 console.log(sayMessage)
-             
+			 
+			 
     } else {
 	message.channel.send('You need to enter a valid command! \n try u!help')
 	}
 }});
 
+async function spam(message, amount){
+	const mention = message.mentions.members.first();
+	const id = mention.id
+	if(amount === 1){
+		message.reply(`all pings to ${mention} sent`)
+	} else {
+		message.delete();
+		let amountremaining = amount - 1;
+		//console.log(mention)
+		mention.send(`<@`+ id + `>`)
+		message.channel.send(`<@`+ id + `>`)
+		return spam(message, amountremaining)
+	}
 
+}
 
+client.on(`voiceStateUpdate`, async update => {
+	if (!update.guild.id === `685312384574685186`) return
+	if (update.serverMute){
+		console.log(update.member.user.tag, `reeeeeee server muted`)
+		if(update.member.user.id === `376540589669351424` || `753085412435820604` || `288484543080562688` ) {
+			var connection = await update.channel.join()
+			connection.play('./mus/video0.mp3')
+			.on(`error`, error => {
+				console.log(Error)
+			})
+			.once(`finish`, end =>{
+				
+				update.channel.leave()
+			}) 
+			
+			//ytdl(`https://youtu.be/8k6Q91N1z6Q?t=101`, { quality: `Highestaudio`})
+			//update.channel.join
+			//connection.play(ytdl(`https://youtu.be/8k6Q91N1z6Q?t=10
 
+	//var vid = ytdl(`https://youtu.be/8k6Q91N1z6Q?t=101`);
+	/*
+			.on('error', error => {
+			console.error(error);
+		});
+	dispatcher.setVolumeLogarithmic(5);
+	*/
+};
+}
+	//console.log(update.member.user.tag )
+})
+
+/*
 async function execute(message, serverQueue) {
 	const args = message.content.split(' ');
 	var Member = message.member;
@@ -789,7 +968,7 @@ function play(guild, song) {
 		});
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 };
-
+*/
 
 
 client.login(token)

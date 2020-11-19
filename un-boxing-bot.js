@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const { prefix, token, GIPHYtoken, y_search, gbltoken, clientid, channelID, nodes } = require('./mus-config-dev.json');
+const defaultSettings = require(`./commands/setings.json`)
 const ytdl = require('ytdl-core');
 const ffmpeg = require('ffmpeg');
 const GphApiClient = require('giphy-js-sdk-core');
@@ -11,6 +12,7 @@ const client = new Discord.Client();
 const bot = new Discord.Client();
 const Giphy = GphApiClient(GIPHYtoken);
 const cooldowns = new Discord.Collection();
+const Enmap = require('enmap');
 //const fs = require('fs-extra');
 
 (function(){
@@ -27,8 +29,7 @@ const cooldowns = new Discord.Collection();
         stream.write(message + "\n")
         oldlog.apply(console, arguments);
     };
-    
-    })();
+})();
 
 
 bot.commands = new Discord.Collection();
@@ -38,6 +39,22 @@ for (const file of commandFiles) {
     bot.commands.set(command.name, command);
 }
 
+bot.settings = new Enmap({
+    name: "settings",
+    fetchAll: false,
+    autoFetch: true,
+    cloneLevel: 'deep'
+  });
+  /*
+  const defaultSettings = {
+    prefix: "!",
+    modLogChannel: "mod-log",
+    modRole: "Moderator",
+    adminRole: "Administrator",
+    welcomeChannel: "welcome",
+    welcomeMessage: "Say hello to {{user}}, everyone!"
+  }
+  */
 
 bot.on("ready", () => {
     bot.music = new ErelaClient(bot, nodes);
@@ -50,16 +67,35 @@ bot.on("ready", () => {
         bot.music.players.destroy(player.guild.id);
     });
 	console.log(`Bot has started, with ${bot.users.cache.size} users, in ${bot.channels.cache.size} channels of ${bot.guilds.cache.size} guilds.`); 
-	bot.user.setActivity(`"${prefix}help" for help`);
+    bot.user.setActivity(`"${prefix}help" for help`);
+    //bot.user.setActivity(`🍰 happy b-day un boxing man 🍰`, { type: `WATCHING`})
   });
+
+  client.on("guildDelete", guild => {
+    bot.settings.delete(guild.id);
+  });
+
+  bot.on(`guildMemberAdd`, member => {
+    bot.settings.ensure(member.guild.id, defaultSettings);
+    let welcomeMessage = bot.settings.get(member.guild.id, "welcomeMessage");
+    welcomeMessage = welcomeMessage.replace("{{user}}", member.user.tag)
+    member.guild.channels
+    .resolve("name", bot.settings.get(member.guild.id, "welcomeChannel"))
+    .send(welcomeMessage)
+    .catch(console.error);
+  })
 
   bot.on('message', async message => {
     if (message.author.bot) return;
-    if (!message.content.startsWith(prefix)) return;
+    const guildConf = bot.settings.ensure(message.guild.id, defaultSettings);
+    if (!message.content.startsWith(guildConf.prefix)) return;
     //const voicechannel = Member.voice.channel;
     //const serverQueue = queue.get(message.guild.id);
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const commandName = args.shift().toLowerCase();
+    const args = message.content.split(/\s+/g);
+    const commandName = args.shift().slice(guildConf.prefix.length).toLowerCase();
+   
+    //const args = message.content.slice(prefix.length).split(/ +/);
+    //const commandName = args.shift().toLowerCase();
 
 	const command = bot.commands.get(commandName)
         || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));

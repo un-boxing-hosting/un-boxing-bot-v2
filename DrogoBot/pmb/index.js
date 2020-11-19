@@ -13,7 +13,7 @@ const fs = require('fs-extra');
   var d = t.getDate();
   var m = t.getMonth();
   var y = t.getFullYear();
-  var file = `pmb-logs/logs-${`${m}-${d}-${y}`}.txt`
+  var file = `logs/pmb-logs/logs-${`${m}-${d}-${y}`}.txt`
   //fs.createFile(file, function(err){console.log(`${err} help me`);});
   var stream = fs.createWriteStream(file, {flags: 'a'})
   console.log = function (message) {

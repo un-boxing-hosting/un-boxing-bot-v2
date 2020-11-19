@@ -9,6 +9,7 @@
     "affiliate": "^3.0.2",
     "apextab-api": "^1.0.5",
     "async": "^3.2.0",
+    "boats.js": "^2.5.0",
     "body-parser": "^1.19.0",
     "common-tags": "^1.8.0",
     "dateformat": "^3.0.3",
@@ -27,7 +28,7 @@
     "node-fetch": "^2.6.1",
     "simple-youtube-api": "^5.2.1",
     "youtube-search": "^1.1.4",
-    "ytdl-core": "^1.0.9",
+    "ytdl-core": "^4.0.5",
     "ytdl-core-discord": "^1.2.3"
   },
   "scripts": {

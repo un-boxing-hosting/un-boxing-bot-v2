@@ -1,10 +1,16 @@
 const Discord = require('discord.js');
 const { prefix, token, GIPHYtoken, channelID } =require(`./drogobot-config.json`);
 const client = new Discord.Client();
+const ytdl = require('ytdl-core');
 //const bot = new Discord.Client();
 const gac = require('giphy-js-sdk-core');
 const Giphy = gac(GIPHYtoken);
 const fs = require('fs-extra');
+const hothead = "491611965870047242";
+const me = "288484543080562688";
+const pidgeonman = "376540589669351424";
+const tasks = "708532752722690058";
+const hothead2 = "727578483965952060";
 
 (function(){
   var	oldlog = console.log;
@@ -12,7 +18,7 @@ const fs = require('fs-extra');
   var d = t.getDate();
   var m = t.getMonth();
   var y = t.getFullYear();
-  var file = `drogo-logs/logs-${`${m}-${d}-${y}`} (main).txt`
+  var file = `logs/drogo-logs/logs-${`${m}-${d}-${y}`}-(main).txt`
   //fs.createFile(file, function(err){console.log(`${err} help me`);});
   var stream = fs.createWriteStream(file, {flags: 'a'})
   console.log = function (message) {
@@ -25,10 +31,13 @@ const fs = require('fs-extra');
 
 client.on("ready", () => {
 	console.log('Ready!');
-	client.user.setActivity(`"${prefix}help" for help. Currently in  ${client.guilds.cache.size} servers. `, { type: 'WATCHING' })
+	client.user.setActivity(`"${prefix}help" for help. Currently in  ${client.guilds.cache.size} servers. `, { type: 'WATCHING' , status: 'idle' })
   .then(presence => console.log(`Activity set to "${prefix}help" for help. Currently in  ${client.guilds.cache.size} servers.`))
   .catch(console.error);
   console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
+  const user = client.users.cache.get(pidgeonman);
+user.send('aahhhhh')
+return;
   });
   client.on('messageDelete', async message => {
     // ignore direct messages
@@ -51,9 +60,9 @@ client.on("ready", () => {
     // And now we can update our output with a bit more information
     // We will also run a check to make sure the log we got was for the same author's message
     if (target.id === message.author.id) {
-      console.log(`A message by ${message.author.tag} was deleted by ${executor.tag}.`);
+      console.log(`A message by ${message.author.tag} was deleted by ${executor.tag} in ${message.guild.name}.`);
     }	else {
-      console.log(`A message by ${message.author.tag} was deleted, but we don't know by who.`);
+      console.log(`A message by ${message.author.tag} was deleted in ${message.guild.name}, but we don't know by who.`);
     }
   });
 
@@ -139,11 +148,32 @@ client.on('message' , async message => {
   const mention = message.mentions.users.first();
   const Member = message.member;
 	const voicechannel = Member.voice.channel;
-    
+    var DrogoYT = "https://www.youtube.com/channel/UCz-zElbMg6wpUnqeT7uiz7A"
   if (command.startsWith(`${prefix}ping`)) { 
-        const m = await message.channel.send("Ping?");
+        const m = await message.channel.send("Uhh");
          m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`)
-  } else if (command.startsWith(`${prefix}gif`)){ 
+         console.log(message.author.tag + " used the ping command in " + message.guild.name)
+  }else if (message.content.startsWith(`${prefix}drogoyt`)){
+		message.delete().catch(owo=>{});
+		const drogoEmbed = new Discord.MessageEmbed()
+
+		.setColor('GREEN')
+        .setTitle('click me to sub')
+        .setURL(DrogoYT)
+        .setAuthor('DrogoBot', 'http://dr.nwpixs.com/media/DrogoLogo.png', 'http://www.unboxingman.com')
+        .setDescription(` go sub to Drogoton on yt`)
+        .setThumbnail('http://dr.nwpixs.com/media/DrogoLogo.png')
+        .addFields(
+            //{ name: 'new dm message', value: `${dms}` }, 
+            { name:`click the title to go to yt`,  value: `or ${DrogoYT}`},
+        )
+        .setTimestamp()
+        .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/logo.png')
+
+       message.channel.send(drogoEmbed)
+       console.log(message.author.tag + " used the DrogoYT command in " + message.guild.name)
+
+	} else if (command.startsWith(`${prefix}gif`)){ 
 		   var input = message.content;
        var userInput= input.substr('4');
       if (!userInput) {
@@ -159,6 +189,7 @@ client.on('message' , async message => {
                   files: [Responsefinal.images.fixed_height.url]
                   
              })})} 
+             console.log(message.author.tag + " used the gif command in " + message.guild.name)
   } else if (command.startsWith(`${prefix}say`)){ 
       if (message.member.hasPermission( 'MANAGE_MESSAGES', { checkAdmin:true, checkOwner: true })){
         var messagesay = message.content;
@@ -180,6 +211,7 @@ client.on('message' , async message => {
         .then(console.log("Done Restarting!"))
      }, 5000));
   }else if (command.startsWith(`${prefix}dm`)){
+    if (!message.member.guild.id === `753369508680433697`) return
 		const mentionmessage = message.content.slice(4);
 		if(mention == null) { return; }
 		message.delete();
@@ -189,9 +221,9 @@ client.on('message' , async message => {
     console.log(`A message was sent from the bot by ${message.author.tag}. "${mentionmessage}"`)
 
 	} else if (command.startsWith(`${prefix}subto`)){
-		message.delete().catch(owo=>{});
+		//message.delete().catch(owo=>{});
 	
-		const coler =args[1];
+	/*	const coler =args[1];
 		const name = args[2];
 		const link = args[3];
 		const logo = args[4];
@@ -213,12 +245,14 @@ client.on('message' , async message => {
         .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/logo.png')
 
 	   message.channel.send(Embed)
-	   console.log(`1${name} 2${link} 3${logo} 4${idk}`)
+	   console.log(`1${name} 2${link} 3${logo} 4${idk}`)*/
   } else if(command.startsWith(`${prefix}welcome`)){ 
     message.delete()
     message.channel.send("Welcome to the server! My name is DrogoBot and I am cool.")
+    console.log(message.author.tag + " used the welcome command in " + message.guild.name)
   } else if(command.startsWith(`${prefix}help`)){ 
    message.channel.send("DrogoBot help menu \n +help is the help command you already ran, dummy! \n +welcome Welcomes people. \n +say Tells the bot to say something in that channel. \n +gif Searches for gifs depending on what follows after the command.")
+   console.log(message.author.tag + " used the help command in " + message.guild.name)
   }
    else if(command.startsWith(`${prefix}activity`)){ 
     var input = message.content;
@@ -268,6 +302,56 @@ client.on('message' , async message => {
       .then(webhook => console.log(`Created webhook ${webhook}`))
       .catch(console.error);    
   }
+    else if(command.startsWith(`${prefix}login`)){ 
+    var input = message.content;
+    var userInput= args[1]
+    if (!userInput) {
+      message.channel.send("Please choose a bot.")
+      client.login(token)
+    }
+    if (type === `1`){
+      var username = DrogoBot
+      message.channel.send(`switching to ${username}`)
+console.log(`${client.user.username} switching to DrogoBot.`)
+client.destroy      
+client.login(token)
+    }
+    if (type === `2`){
+      var username = Devgoton
+      message.channel.send(`switching to ${username}`)
+      console.log(`${client.user.username} switching to Devgoton.`)
+      client.destroy
+      client.login(token2)
+    }
+    console.log(`Bot signed in as ${username}`)
+	}else if (message.content.startsWith(`${prefix}vid`)){
+   // if (message.member.user.id === pidgeonman || hothead || hothead2) return;
+        // if (!message.member.user.id === me) return
+		var arg1 = args[1];
+		var arg2 = args[2]
+		var vidurl = await ytdl.getURLVideoID(arg1)
+		
+		ytdl(arg1, { filter: format => format.container === 'mp4' })
+       .pipe(fs.createWriteStream(`F:/DrogoBotmp3/${arg2}.mp3`));
+		message.channel.send(`vid ${vidurl} saveed as ${arg2}.mp3`)
+		console.log(`new vid saved by ${message.author.tag} url ${vidurl} named ${arg2}.mp3`)
+		console.log(`https://www.youtube.com/watch?v=`+ vidurl)
+
+	}else if (message.content.startsWith(`${prefix}fplay`)){
+    //if (message.member.user.id === hothead || hothead2) return;
+    // if (!message.member.user.id === me) return
+		if (!message.member.voice.channel) return;
+		var arg1 = args[1]
+		var connection = await message.member.voice.channel.join()
+      connection.play(`F:/DrogoBotmp3/${arg1}.mp3`)
+			.on(`error`, error => {
+				console.log(Error)
+			})
+			.once(`finish`, end =>{
+				
+				message.member.voice.channel.leave()
+			}) 
+    }
 })
 
 client.login(token)

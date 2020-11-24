@@ -1,6 +1,79 @@
-2020-11-16 13:40:51.874  INFO 52720 --- [XNIO-1 I/O-7] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:61587 -- CloseStatus[code=1006, reason=]
-2020-11-16 13:40:51.919  INFO 52720 --- [XNIO-1 I/O-7] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-11-16 13:54:01.490  INFO 29732 --- [main] lavalink.server.Launcher                 : 
+2020-11-22 15:01:40.996  WARN 21624 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2020-11-22 15:01:41.013 ERROR 21624 --- [main] lavalink.server.Launcher                 : Application failed
+
+java.lang.UnsupportedClassVersionError: lavalink/server/info/AppInfo has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0
+	at java.lang.ClassLoader.defineClass1(Native Method) ~[na:1.8.0_261]
+	at java.lang.ClassLoader.defineClass(Unknown Source) ~[na:1.8.0_261]
+	at java.security.SecureClassLoader.defineClass(Unknown Source) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.defineClass(Unknown Source) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.access$100(Unknown Source) ~[na:1.8.0_261]
+	at java.net.URLClassLoader$1.run(Unknown Source) ~[na:1.8.0_261]
+	at java.net.URLClassLoader$1.run(Unknown Source) ~[na:1.8.0_261]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.findClass(Unknown Source) ~[na:1.8.0_261]
+	at java.lang.ClassLoader.loadClass(Unknown Source) ~[na:1.8.0_261]
+	at org.springframework.boot.loader.LaunchedURLClassLoader.loadClass(LaunchedURLClassLoader.java:93) ~[Lavalink.jar:na]
+	at java.lang.ClassLoader.loadClass(Unknown Source) ~[na:1.8.0_261]
+	at lavalink.server.Launcher.getVersionInfo(Launcher.kt:50) [classes!/:na]
+	at lavalink.server.Launcher.getVersionInfo$default(Launcher.kt:49) [classes!/:na]
+	at lavalink.server.Launcher$main$1.onApplicationEvent(Launcher.kt:118) ~[classes!/:na]
+	at lavalink.server.Launcher$main$1.onApplicationEvent(Launcher.kt:43) ~[classes!/:na]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:76) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:53) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:342) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:305) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at lavalink.server.Launcher.main(Launcher.kt:127) [classes!/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_261]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_261]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_261]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_261]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) [Lavalink.jar:na]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) [Lavalink.jar:na]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:51) [Lavalink.jar:na]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:52) [Lavalink.jar:na]
+
+2020-11-22 15:01:41.014 ERROR 21624 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.UnsupportedClassVersionError: lavalink/server/info/AppInfo has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0
+	at java.lang.ClassLoader.defineClass1(Native Method) ~[na:1.8.0_261]
+	at java.lang.ClassLoader.defineClass(Unknown Source) ~[na:1.8.0_261]
+	at java.security.SecureClassLoader.defineClass(Unknown Source) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.defineClass(Unknown Source) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.access$100(Unknown Source) ~[na:1.8.0_261]
+	at java.net.URLClassLoader$1.run(Unknown Source) ~[na:1.8.0_261]
+	at java.net.URLClassLoader$1.run(Unknown Source) ~[na:1.8.0_261]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.findClass(Unknown Source) ~[na:1.8.0_261]
+	at java.lang.ClassLoader.loadClass(Unknown Source) ~[na:1.8.0_261]
+	at org.springframework.boot.loader.LaunchedURLClassLoader.loadClass(LaunchedURLClassLoader.java:93) ~[Lavalink.jar:na]
+	at java.lang.ClassLoader.loadClass(Unknown Source) ~[na:1.8.0_261]
+	at lavalink.server.Launcher.getVersionInfo(Launcher.kt:50) [classes!/:na]
+	at lavalink.server.Launcher.getVersionInfo$default(Launcher.kt:49) [classes!/:na]
+	at lavalink.server.Launcher$main$1.onApplicationEvent(Launcher.kt:118) ~[classes!/:na]
+	at lavalink.server.Launcher$main$1.onApplicationEvent(Launcher.kt:43) ~[classes!/:na]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:76) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:53) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:342) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:305) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at lavalink.server.Launcher.main(Launcher.kt:127) [classes!/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_261]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_261]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_261]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_261]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) [Lavalink.jar:na]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) [Lavalink.jar:na]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:51) [Lavalink.jar:na]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:52) [Lavalink.jar:na]
+
+2020-11-22 15:01:44.466  INFO 12996 --- [main] lavalink.server.Launcher                 : 
 
 [32m       .  [31m _                  _ _       _    [32m__ _ _
 [32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
@@ -18,65 +91,25 @@
 	JVM:            14.0.2
 	Lavaplayer      1.3.50
 
-2020-11-16 13:54:01.556  INFO 29732 --- [main] lavalink.server.Launcher                 : Starting Launcher on un-boxing-mans-pc with PID 29732 (C:\Users\conne\OneDrive\Desktop\bot\lavalink\Lavalink.jar started by conne in C:\Users\conne\OneDrive\Desktop\bot\lavalink)
-2020-11-16 13:54:01.556  INFO 29732 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
-2020-11-16 13:54:01.632  WARN 29732 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2020-11-16 13:54:02.520  WARN 29732 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2020-11-16 13:54:02.538  INFO 29732 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
-2020-11-16 13:54:02.538  INFO 29732 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 949 ms
-2020-11-16 13:54:02.825  WARN 29732 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
-2020-11-16 13:54:02.834  INFO 29732 --- [main] l.s.c.AudioSendFactoryConfiguration      : OS: Windows 10, Arch: amd64
-2020-11-16 13:54:02.835  INFO 29732 --- [main] l.s.c.AudioSendFactoryConfiguration      : JDA-NAS supported system detected. Enabled native audio sending.
-2020-11-16 13:54:02.835  INFO 29732 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting buffer to 400ms
-2020-11-16 13:54:02.835  INFO 29732 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting playlist load limit to 6
-2020-11-16 13:54:03.126  INFO 29732 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
-2020-11-16 13:54:03.429  INFO 29732 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-11-16 13:54:03.721  INFO 29732 --- [main] org.xnio                                 : XNIO version 3.3.8.Final
-2020-11-16 13:54:03.733  INFO 29732 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
-2020-11-16 13:54:03.833  INFO 29732 --- [main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 2333 (http) with context path ''
-2020-11-16 13:54:03.837  INFO 29732 --- [main] lavalink.server.Launcher                 : Started Launcher in 2.65 seconds (JVM running for 3.052)
-2020-11-16 13:55:11.730  INFO 29732 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-11-16 13:55:11.731  INFO 29732 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-11-16 13:55:11.736  INFO 29732 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
-2020-11-16 13:55:11.749  INFO 29732 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:51456
-2020-11-16 13:55:11.840  INFO 29732 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:51456
-2020-11-16 22:40:45.232  INFO 41008 --- [main] lavalink.server.Launcher                 : 
-
-[32m       .  [31m _                  _ _       _    [32m__ _ _
-[32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
-[32m     ( ( )[31m| |/ _` \ \ / / _` | | | '_ \| |/ /[32m \ \ \ \
-[32m      \\/ [31m| | (_| |\ V / (_| | | | | | |   < [32m  ) ) ) )
-[32m       '  [31m|_|\__,_| \_/ \__,_|_|_|_| |_|_|\_\[32m / / / /
-[0m    =========================================[32m/_/_/_/[0m
-
-	Version:        c53259e604ead573df143ae27722c5dd3054ab2c-SNAPSHOT
-	Build:          1079
-	Build time:     17.07.2020 19:19:35 UTC
-	Branch          master
-	Commit:         c53259e
-	Commit time:    17.07.2020 19:14:44 UTC
-	JVM:            14.0.2
-	Lavaplayer      1.3.50
-
-2020-11-16 22:40:45.299  INFO 41008 --- [main] lavalink.server.Launcher                 : Starting Launcher on un-boxing-mans-pc with PID 41008 (C:\Users\conne\OneDrive\Desktop\bot\lavalink\Lavalink.jar started by conne in C:\Users\conne\OneDrive\Desktop\bot\lavalink)
-2020-11-16 22:40:45.300  INFO 41008 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
-2020-11-16 22:40:45.372  WARN 41008 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2020-11-16 22:40:46.391  WARN 41008 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2020-11-16 22:40:46.410  INFO 41008 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
-2020-11-16 22:40:46.410  INFO 41008 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1071 ms
-2020-11-16 22:40:46.669  WARN 41008 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
-2020-11-16 22:40:46.677  INFO 41008 --- [main] l.s.c.AudioSendFactoryConfiguration      : OS: Windows 10, Arch: amd64
-2020-11-16 22:40:46.678  INFO 41008 --- [main] l.s.c.AudioSendFactoryConfiguration      : JDA-NAS supported system detected. Enabled native audio sending.
-2020-11-16 22:40:46.678  INFO 41008 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting buffer to 400ms
-2020-11-16 22:40:46.678  INFO 41008 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting playlist load limit to 6
-2020-11-16 22:40:47.019  INFO 41008 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
-2020-11-16 22:40:47.505  INFO 41008 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-11-16 22:40:47.904  INFO 41008 --- [main] org.xnio                                 : XNIO version 3.3.8.Final
-2020-11-16 22:40:47.912  INFO 41008 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
-2020-11-16 22:40:47.990  INFO 41008 --- [main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 2333 (http) with context path ''
-2020-11-16 22:40:47.995  INFO 41008 --- [main] lavalink.server.Launcher                 : Started Launcher in 3.072 seconds (JVM running for 3.557)
-2020-11-16 22:40:52.475  INFO 41008 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-11-16 22:40:52.475  INFO 41008 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-11-16 22:40:52.481  INFO 41008 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
-2020-11-16 22:40:52.498  INFO 41008 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:58174
-2020-11-16 22:40:52.591  INFO 41008 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:58174
+2020-11-22 15:01:44.527  INFO 12996 --- [main] lavalink.server.Launcher                 : Starting Launcher on un-boxing-mans-pc with PID 12996 (C:\Users\conne\OneDrive\Desktop\bot\lavalink\Lavalink.jar started by conne in C:\Users\conne\OneDrive\Desktop\bot\lavalink)
+2020-11-22 15:01:44.528  INFO 12996 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
+2020-11-22 15:01:44.578  WARN 12996 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2020-11-22 15:01:45.387  WARN 12996 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2020-11-22 15:01:45.404  INFO 12996 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2020-11-22 15:01:45.404  INFO 12996 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 847 ms
+2020-11-22 15:01:45.637  WARN 12996 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
+2020-11-22 15:01:45.643  INFO 12996 --- [main] l.s.c.AudioSendFactoryConfiguration      : OS: Windows 10, Arch: amd64
+2020-11-22 15:01:45.644  INFO 12996 --- [main] l.s.c.AudioSendFactoryConfiguration      : JDA-NAS supported system detected. Enabled native audio sending.
+2020-11-22 15:01:45.644  INFO 12996 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting buffer to 400ms
+2020-11-22 15:01:45.644  INFO 12996 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting playlist load limit to 6
+2020-11-22 15:01:45.919  INFO 12996 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2020-11-22 15:01:46.192  INFO 12996 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-22 15:01:46.437  INFO 12996 --- [main] org.xnio                                 : XNIO version 3.3.8.Final
+2020-11-22 15:01:46.443  INFO 12996 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
+2020-11-22 15:01:46.499  INFO 12996 --- [main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 2333 (http) with context path ''
+2020-11-22 15:01:46.501  INFO 12996 --- [main] lavalink.server.Launcher                 : Started Launcher in 2.306 seconds (JVM running for 2.649)
+2020-11-22 15:01:51.965  INFO 12996 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-22 15:01:51.965  INFO 12996 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-22 15:01:51.969  INFO 12996 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2020-11-22 15:01:51.981  INFO 12996 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:51219
+2020-11-22 15:01:52.061  INFO 12996 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:51219

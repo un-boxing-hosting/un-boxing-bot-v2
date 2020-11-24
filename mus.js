@@ -9,6 +9,7 @@ const {
 	channelID,
 	BoatsAPI,
 } = require('./mus-config.json');
+const idlist = { dro, box, task, win10, boxallt } = require(`./idlist.json`);
 const bot = new Discord.Client();
 const ytdl = require('ytdl-core');
 const ffmpeg = require('ffmpeg');
@@ -596,16 +597,18 @@ client.on('message', async message => {
 	message.channel.send(`unbanned ${buser} for ${reson}`)
  	} else if (message.content.startsWith(`${prefix}pix`)){
 		if (!message.mentions.users.size) {
-			return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
+			 message.channel.send(`Your avatar:`, { files: [message.author.displayAvatarURL({ format: "png", dynamic: true })] });
+			//<${message.author.displayAvatarURL({ format: "png", dynamic: true })}>
 		}
 	
 		const avatarList = message.mentions.users.map(user => {
-			return `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
+			var mess = `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`
+			message.channel.send(mess, { files: [user.displayAvatarURL({ format: "png", dynamic: true })] })
 		});
 	
 		// send the entire array of strings as a message
 		// by default, discord.js will `.join()` the array with `\n`
-		message.channel.send(avatarList);
+		//message.channel.send(avatarList, { files: [message.author.displayAvatarURL({ format: "png", dynamic: true })] });
 
 	}else if (message.content.startsWith(`${prefix}ty`)){
 		if (args[1] = `0`){
@@ -654,10 +657,11 @@ client.on('message', async message => {
 			.then (console.log(`yes perm`))
 
 	} else if(message.content.startsWith(prefix + `spam`)){
-		if (!message.author.id === `376540589669351424` || !message.author.id === `288484543080562688`) return;
+		//if (!message.author.id === box || !message.author.id === `288484543080562688`) return;
 		var amount = args[2] 
-		 spam(message,amount)
-		 message.guild.roles.fetch
+		var dm = args[3] 
+		 spam(message,amount,dm)
+		 //message.guild.roles.fetch
 	
 	} else if (message.content.startsWith(`${prefix}zip`)){
 		if (!message.member.voice.channel) return;
@@ -699,7 +703,10 @@ client.on('message', async message => {
 		var vidurl = await ytdl.getURLVideoID(arg1)
 		
 		ytdl(arg1, { filter: format => format.container === 'mp4' })
-       .pipe(fs.createWriteStream(`./mus/${arg2}.mp3`));
+	   .pipe(fs.createWriteStream(`./mus/${arg2}.mp3`))
+	   .on(`error`, err => {
+		   console.log(err)
+	   })
 		//https://www.youtube.com/watch?v=lw7nKebW1UQ
 		message.channel.send(`vid ${vidurl} saveed as ${arg2}.mp3`)
 		console.log(`new vid saved by ${message.author.tag} url ${vidurl} named ${arg2}.mp3`)
@@ -744,6 +751,11 @@ client.on('message', async message => {
 				
 				message.member.voice.channel.leave()
 			}) 
+	}else if (message.content.startsWith(`${prefix}list`)){
+		const Files = fs.readdirSync('./mus').filter(file => file.endsWith('.mp3'));
+		
+		message.channel.send(Files)
+	
     } else {
 	message.channel.send('You need to enter a valid command!\n try u!help')
 	}
@@ -833,26 +845,38 @@ client.on('message', async message => {
 	}
 }});
 
-async function spam(message, amount){
+async function spam(message, amount, dm){
 	const mention = message.mentions.members.first();
+	const args = message.content.slice(prefix.length + `spam`).split(/ +/);
+	//const dm = args[3];
+	const mess = message.content.slice(mention + amount.length + dm.length ).split(/ +/);
+	//const args2 = args1.content.slice(amount.length).split(/ +/);
+	
+	//const mess = args2.content.slice(dm.length).split(/ +/);
 	const id = mention.id
 	if(amount === 1){
 		message.reply(`all pings to ${mention} sent`)
+	}if(dm === `dm`){
+		mention.send(`<@`+ id + `>` + mess)
+		let amountremaining = amount - 1;
+		return spam(message, amountremaining, dm)
+	
 	} else {
 		message.delete();
 		let amountremaining = amount - 1;
 		//console.log(mention)
-		mention.send(`<@`+ id + `>`)
+		mention.send(`<@`+ id + `>` + mess)
 		message.channel.send(`<@`+ id + `>`)
-		return spam(message, amountremaining)
+		return spam(message, amountremaining, dm)
 	}
 
 }
 
 client.on(`voiceStateUpdate`, async update => {
-	if (!update.guild.id === `685312384574685186`) return
+	if (!update.guild.id === `685312384574685186`) return;
+	
 	if (update.serverMute){
-		console.log(update.member.user.tag, `reeeeeee server muted`)
+		console.log(update.member.user.tag, `reeeeeee server muted`, update.channel.name)
 		if(update.member.user.id === `376540589669351424` || `753085412435820604` || `288484543080562688` ) {
 			var connection = await update.channel.join()
 			connection.play('./mus/video0.mp3')

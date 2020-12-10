@@ -1,3 +1,5 @@
+const db = require('quick.db');
+const { prefix } = require('./mus-config-dev.json');
 module.exports = {
 	name: '',
     aliases: ['', ''],

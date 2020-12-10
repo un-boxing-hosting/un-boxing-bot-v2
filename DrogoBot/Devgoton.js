@@ -12,7 +12,7 @@ const fs = require('fs-extra');
   var d = t.getDate();
   var m = t.getMonth();
   var y = t.getFullYear();
-  var file = `logs/devton-logs/logs-${`${m}-${d}-${y}`}.txt`
+  var file = `F:/botlog/Devgoton/log-${`${m}-${d}-${y}`}.txt`
   //fs.createFile(file, function(err){console.log(`${err} help me`);});
   var stream = fs.createWriteStream(file, {flags: 'a'})
   console.log = function (message) {

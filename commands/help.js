@@ -1,4 +1,5 @@
-const { prefix } = require('../mus-config-dev.json');
+//const { prefix } = require('../mus-config-dev.json');
+const { MessageEmbed } = require("discord.js");
 module.exports = {
 	name: 'help',
 	description: 'List all of my commands or info about a specific command.',
@@ -6,9 +7,32 @@ module.exports = {
 	usage: '[command name]',
 	cooldown: 5,
 	execute(bot, message, args) {
-		const data = [];
-    const { commands } = message.client;
+		//const data = [];
+   // const { commands } = bot;
+    //const name = args[0];
+    //const command = bot.commands.get(name) || bot.commands.find(c => c.aliases && c.aliases.includes(name));
+    
+    let commands = bot.commands.array();
 
+    let helpEmbed = new MessageEmbed()
+      .setTitle("Music Help")
+      .setDescription("List of all commands")
+      .setColor("#F8AA2A");
+    
+        
+    commands.forEach((cmd) => {
+   // if(cmd.name == null) return;
+      helpEmbed.addFields(
+        {name: `${bot.prefix}${cmd.name} ${cmd.aliases ? `(${cmd.aliases})` : "(no aliases)"}`, value: `${cmd.description}.`},
+        true
+      );
+    });
+
+    helpEmbed.setTimestamp();
+
+    return message.channel.send(helpEmbed).catch(console.error);
+
+/*
     if (!args.length) {
         data.push('Here\'s a list of all my commands:');
         data.push(commands.map(command => command.name).join(', '));
@@ -41,5 +65,6 @@ module.exports = {
     data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
     
     message.channel.send(data, { split: true });
+    */
 	},
 };

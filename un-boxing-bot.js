@@ -27,6 +27,7 @@ const cooldowns = new Discord.Collection();
 const db = require('quick.db');
 //const Enmap = require('enmap');
 //const fs = require('fs-extra');
+bot.commands = new Discord.Collection();
 
 (function () {
     var oldlog = console.log;
@@ -45,8 +46,51 @@ const db = require('quick.db');
         oldlog.apply(console, arguments);
     };
 })();
+
+bot.on('message', async dmmessage => {
+
+    if (!dmmessage.channel.type === 'dm') return;
+    if (dmmessage.channel.type === 'dm') {
+        //if (dmmessage.author.bot) return
+        const dms = dmmessage.content;
+        const dmauthor = dmmessage.author.tag;
+        //console.log(`message ${dms} sent by ${dmauthor} in dm`)
+        const channel = bot.channels.cache.get(`${channelID}`)
+        const dmEmbed = new Discord.MessageEmbed()
+
+            .setColor('GREEN')
+            .setTitle('new DM')
+            .setURL('http://www.unboxingman.com')
+            .setAuthor('un boxing bot', 'http://unpix.nwpixs.com/logo.png', 'http://www.unboxingman.com')
+            .setDescription(` Received: ${dms}`)
+            .setThumbnail('http://unpix.nwpixs.com/logo.png')
+            .addFields(
+                //{ name: 'new dm message', value: `${dms}` }, 
+                {
+                    name: `by ${dmauthor}`,
+                    value: `.`
+                },
+            )
+            .setTimestamp()
+            .setFooter('made by un boxing man yt', 'http://unpix.nwpixs.com/unboxingman%20logo%201.1.png')
+
+        channel.send(dmEmbed)
+        console.log(`message ${dms} sent by ${dmmessage.author.tag} in dm`)
+    }
+});
+
 //#region 
 
+bot.on(`messageReactionAdd`, async react => {
+    // if (!channel.guild) return;
+    //if (react.)
+    //var y = db.get(`channelcreate_${channel.guild.id}`)
+    //if (y !== 'enabled') return;
+    // var x = db.get('loggingchannel_' + channel.guild.id)
+    //var x = bot.channels.cache.get(x)
+    return;
+
+})
 
 bot.on('messageDelete', async message => {
 
@@ -64,19 +108,56 @@ bot.on('messageDelete', async message => {
     }
 
     if (message.guild) {
-        if (message.author.bot) return;
+        // if (message.author.bot) return;
         var y = db.get('messagedelete_' + message.guild.id)
         if (y !== `enabled`) return;
         var x = db.get('loggingchannel_' + message.guild.id)
         x = bot.channels.cache.get(x)
-        if (message.channel == x) return;
+        const fetchedLogs = await message.guild.fetchAuditLogs({
+            limit: 1,
+            type: 'MESSAGE_DELETE',
+        });
+        const deletionLog = fetchedLogs.entries.first();
+        const {
+            executor,
+            target
+        } = deletionLog;
+        if (message.channel == x) {
+            var embed = new Discord.MessageEmbed()
+                .setColor('RANDOM')
+                .setAuthor('message deleted', message.guild.iconURL)
+                .addField('user', message.author.tag)
+            if (!deletionLog) {
+                embed.addField(`was deleted, but no relevant audit logs were found.`)
+            }
+            if (deletionLog) {
+                embed.addField('deleteed by', executor.tag)
+
+            }
+            if (message.content) {
+
+                embed.addField('message', message.content)
+
+            }
+
+            embed.addField('channel', message.channel)
+            embed.setTimestamp()
+            message.guild.owner.send(embed).catch()
+            x.send(`dmed the guild owner :)`)
+            return;
+        }
         var embed = new Discord.MessageEmbed()
             .setColor('RANDOM')
             .setAuthor('message deleted', message.guild.iconURL)
             .addField('user', message.author.tag)
-            .addField('message', message.content)
-            .addField('channel', message.channel)
-            .setTimestamp()
+        if (!deletionLog) {
+            embed.addField(`was deleted, but no relevant audit logs were found.`)
+        } else {
+            embed.addField('deleteed by', executor.tag)
+        }
+        embed.addField('message', message.content)
+        embed.addField('channel', message.channel)
+        embed.setTimestamp()
         x.send(embed).catch()
     }
 
@@ -123,9 +204,27 @@ bot.on("emojiCreate", async function (emoji) {
 
     var embed = new Discord.MessageEmbed()
         .setColor('RANDOM')
-        .setAuthor('emoji created', emoji.guild.iconURL)
+        .setAuthor('emoji created', emoji.url)
         .addField('emote name', emoji.name)
         .addField('emote', emoji + `\n**----------------------**`)
+        .setTimestamp()
+    x.send(embed).catch()
+
+
+});
+bot.on("emojiUpdate", async function (emoji1, emoji2) {
+
+    var y = db.get(`emojiUpdate_${emoji1.guild.id}`)
+    if (y !== 'enabled') return;
+    var x = db.get('loggingchannel_' + emoji1.guild.id)
+    var x = bot.channels.cache.get(x)
+
+    var embed = new Discord.MessageEmbed()
+        .setColor('RANDOM')
+        .setAuthor('emoji Updated', emoji1.url)
+        .addField('old emote name', emoji1.name)
+        .addField('new emote name', emoji2.name)
+        .addField('emote', emoji1 + `\n**----------------------**`)
         .setTimestamp()
     x.send(embed).catch()
 
@@ -139,9 +238,9 @@ bot.on("emojiDelete", async function (emoji) {
 
     var embed = new Discord.MessageEmbed()
         .setColor('RANDOM')
-        .setAuthor('emoji deleted', emoji.guild.iconURL)
+        .setAuthor('emoji deleted', emoji.url)
         .addField('emote name', emoji.name)
-        .addField('emote url', emoji.url + `\n**----------------------**`)
+        .addField('emote url', emoji + `\n**----------------------**`)
         .setTimestamp()
     x.send(embed).catch()
 
@@ -179,21 +278,29 @@ bot.on("guildBanRemove", async function (guild, user) {
     x.send(embed).catch()
 });
 bot.on("guildMemberAdd", async function (member) {
-
+    var y = db.get(`guildmemberaddrole_${member.guild.id}`)
+    if (y !== 'enabled') return;
+    var x = db.get('joinrole_' + member.guild.id)
+    member.roles.add(x)
+    // var x = bot.channels.cache.get(x)
+});
+bot.on("guildMemberAdd", async function (member) {
+    // console.log(member.user.tag)
     var y = db.get(`guildmemberadd_${member.guild.id}`)
     if (y !== 'enabled') return;
     var x = db.get('loggingchannel_' + member.guild.id)
     var x = bot.channels.cache.get(x)
 
-    var embed = new Discord.MessageEmbed()
+    var embed1 = new Discord.MessageEmbed()
         .setColor('RANDOM')
         .setAuthor("user join", member.guild.iconURL)
         .addField('user tag', member.user.tag)
         .addField('user id', member.user.id + `\n**----------------------**`)
         .setTimestamp()
-    x.send(embed).catch()
+    x.send(embed1).catch()
 });
-bot.on("guildMemberRemove", async function (member) {
+bot.on(`guildMemberRemove`, async function (member) {
+    // console.log(member.user.tag)
     var y = db.get(`guildmemberremove_${member.guild.id}`)
     if (y !== 'enabled') return;
     var x = db.get('loggingchannel_' + member.guild.id)
@@ -296,7 +403,7 @@ bot.on(`roleUpdate`, async function (role1, role2) {
         // x.send(embed).catch()
     }
     if (role1.color !== role2.color) {
-        embed.setColor('RANDOM')
+        embed.setColor(role2.color)
         embed.setAuthor("role update", role1.guild.iconURL)
         embed.addFields({
             name: `old color`,
@@ -336,19 +443,19 @@ bot.on(`messageUpdate`, async function (oldmess, newmess) {
     if (y !== 'enabled') return;
     var x = db.get('loggingchannel_' + oldmess.guild.id)
     var x = bot.channels.cache.get(x)
+    /*
+        var embed = new Discord.MessageEmbed()
+            .setColor('RANDOM')
+            .setAuthor("message Updated", oldmess.guild.iconURL)
+            .addField('message Updated by', oldmess.author)
+            .addField('message Updated in channel', oldmess.channel)
+            .addField('message Updated from', oldmess.content)
+            .addField('message Updated to', newmess.content)
+            .addField('message id', newmess.id + `\n**----------------------**`)
+            .setTimestamp()
 
-    var embed = new Discord.MessageEmbed()
-        .setColor('RANDOM')
-        .setAuthor("message Updated", oldmess.guild.iconURL)
-        .addField('message Updated by', oldmess.author)
-        .addField('message Updated in channel', oldmess.channel)
-        .addField('message Updated from', oldmess.content)
-        .addField('message Updated to', newmess.content)
-        .addField('message id', newmess.id + `\n**----------------------**`)
-        .setTimestamp()
-
-    //x.send(embed) //.catch()
-
+        //x.send(embed) //.catch()
+    */
 
 })
 //#endregion
@@ -388,8 +495,8 @@ bot.on("ready", () => {
         bot.music.players.destroy(player.guild.id);
     });
     console.log(`Bot has started, with ${bot.users.cache.size} users, in ${bot.channels.cache.size} channels of ${bot.guilds.cache.size} guilds.`);
-    console.log(countdownTimer())
-    //bot.user.setActivity(`"${prefix}help" for help`);
+    // console.log(countdownTimer())
+    bot.user.setActivity(`"${prefix}help" for help`);
     //bot.user.setActivity('🦃happy thanksgiving🦃')
     //bot.user.setActivity(`🍰 happy b-day un boxing man 🍰`, { type: `WATCHING`})
 });

@@ -31,7 +31,8 @@ const {
 	dir
 } = require('async');
 const {
-	json
+	json,
+	text
 } = require('body-parser');
 const fs = require('fs-extra');
 const BOATS = require('boats.js');
@@ -39,6 +40,7 @@ const Boats = new BOATS(BoatsAPI);
 //const db = require('quick.db')
 
 //const Glenn = new GBL(clientid , gbltoken , false, {webhookPort: 3001, webhookPath: "/GBLWebhook", webhookAuth: "un-boxing-man-is-cool"});
+
 
 (function () {
 	var oldlog = console.log;
@@ -76,8 +78,9 @@ setInterval(() => {
 Glenn.webhook.on("vote", vote => console.log(vote)) // Will send you the user that voted when the vote is recived.
 Glenn.webhook.on("ready", console.log) // Will console log when the webhook is online and ready to use!
 */
+/*
 const mysqlconnect = mysql.createConnection({
-	host: '',
+	host: '67.195.197.21',
 	user: 'unboxingbot',
 	password: 'D5Fg9DOgo6XZjl5g',
 	database: 'unboxingbot'
@@ -89,30 +92,32 @@ const opts = {
 	type: 'video'
 };
 
-//mysqlconnect.connect(Function(error) {
-//	} (!!error) {
-//		console.log('error'),
-//	} else {
-//		console.log('connected');
-//	}
-//});
-//app.get('/', function(req, resp) {
-//	connection.query("select * from unboxingbot", function(error, rows, fields)
-//	if (condition) {
-//		
-//}
-//)}
-//app.listen(3306);
-
-//"${prefix}help" for help`
+mysqlconnect.connect(`error`, (error) => {
+	if (error) {
+		console.log(error);
+	} else {
+		console.log('connected');
+	}
+});
+/*
+app.get('/', function(req, resp) {
+	connection.query("select * from unboxingbot", function(error, rows, fields)
+	if (condition) {
+		
+}
+)}
+app.listen(3306);
+/*
+"${prefix}help" for help`
 client.once('ready', () => {
 	/*
 		console.log('Ready!');
 		client.user.setActivity(`"${prefix}" for help `, { type: 'WATCHING' })
 	  .then(presence => console.log(`Activity set to "${prefix}" for help `))
 	  .catch(console.error);
-	  */
+	  
 });
+*/
 
 client.on("ready", () => {
 	console.log('Ready!');
@@ -123,17 +128,17 @@ client.on("ready", () => {
 	//var datefull = (new Date(),  )
 	var todayDate = new Date().toISOString().slice(0, 10);
 	console.log(`${todayDate}`);
-	console.log(countdownTimer());
+	//console.log(countdownTimer());
 
 	//client.user.setActivity(`🍰 happy b-day un boxing man 🍰`, { type: `WATCHING`})
 	//client.user.setActivity('🦃happy thanksgiving🦃')
-	/*
+
 	client.user.setActivity(`"${prefix}help" for help `, {
 			type: 'WATCHING'
 		})
 		.then(presence => console.log(`Activity set to "${prefix}" for help `))
 		.catch(console.error);
-		*/
+
 	console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
 	Boats.postStats(client.guilds.cache.size, clientid).then(() => {
 		console.log('Successfully updated server count.')
@@ -142,6 +147,7 @@ client.on("ready", () => {
 	});
 
 });
+bot.logging = new Discord.Collection();
 
 client.on("guildCreate", guild => {
 	// This event triggers when the bot joins a guild.
@@ -172,6 +178,14 @@ client.once('reconnecting', () => {
 client.once('disconnect', () => {
 	console.log('Disconnect!');
 });
+
+client.on(`guildMemberAdd`, async function (member) {
+	if (member.guild.id === `685312384574685186`) {
+		//member.roles.add(`693949731793272863`)
+		//console.log(member.user.tag);
+	} else return;
+
+})
 
 client.on('message', async message => {
 	//const mention = message.mentions.members.first();
@@ -231,7 +245,7 @@ client.on('message', async message => {
 	if (!message.content.startsWith(prefix)) return;
 	if (message.channel.type === 'dm') return;
 
-	const serverQueue = queue.get(message.guild.id);
+	//const serverQueue = queue.get(message.guild.id);
 	const args = message.content.slice(prefix.length).split(/ +/);
 	const command = message.content.toLocaleLowerCase();
 	//const admin = message.author.id = ("376540589669351424");
@@ -243,6 +257,7 @@ client.on('message', async message => {
 	console.log(command);
 
 	if (command.startsWith(`${prefix}play`)) {
+		message.content.includes
 		//execute(message, serverQueue);
 		return;
 	} else if (command.startsWith(`${prefix}skip`)) {
@@ -550,7 +565,7 @@ client.on('message', async message => {
 
 			console.log(`${sayMessage} sent by ${message.author.tag} in channel ${message.channel.name} in guild ${message.guild.name}`)
 		} else {
-			message.channel.send('you need to have `MANAGE_MESSAGES`')
+			message.channel.send('you are not the true one u do not have the power of the onahole foot')
 		}
 	} else if (command.startsWith(`${prefix}dm`)) {
 		const mentionmessage = message.content.slice(5);
@@ -566,13 +581,15 @@ client.on('message', async message => {
 	} else if (command.startsWith(`${prefix}hi`)) {
 		const guild = message.guild;
 		var roles = guild.roles;
-		const role = guild.roles.cache.find(role => role.name === 'boxis dum');
-		role.setPermissions(['ADMINISTRATOR'])
-			.then(updated => console.log(`Updated permissions to ${updated.permissions.bitfield}`))
-			.catch(console.error);
-		// const member = message.mentions.members.first();
-		//  member.roles.add(role);
-		//message.channel.send(`hi`)
+		const role = guild.roles.cache.find(role => role.id === '801192870480576562');
+		// bots 801195283622133762 name pending
+		// co owner 801192870480576562 name pending
+		//role.setPermissions(['ADMINISTRATOR'])
+		//.then(updated => console.log(`Updated permissions to ${updated.permissions.bitfield}`))
+		//.catch(console.error);
+		const member = message.mentions.members.first();
+		member.roles.add(role);
+		message.channel.send(`hi`)
 
 	} else if (command.startsWith(`${prefix}no`)) {
 		const guild = message.guild;
@@ -712,33 +729,46 @@ client.on('message', async message => {
 	} else if (command.startsWith(`${prefix}ban`)) {
 		const reson = args[3]
 		const bdays = args[2]
+		const id = client.users.cache.get(args[1])
 		const whokick = mention;
 		if (!message.member.hasPermission(`BAN_MEMBERS`, {
 				checkAdmin: true,
 				checkOwner: true
 			})) return;
-		if (!mention) {
+		/*if (!mention || !id) {
 			message.channel.send(`pls mention a member to ban`);
 			return;
 		}
+		*/
 		let authorhighestrole = message.member.roles.highest.position;
 		//let mentionrole = mention.member.roles.highest.position
 
 		//if (!mention.kickable){
 		//	message.channel.send(`I have no premissions to kick this user`)
 		//}
-		mention.send(` you have ben banned from ${message.guild.name} for ${reson}`)
-		mention.ban({
-				days: bdays,
-				reason: `${reson}`
-			})
-			.then(() => console.log(`banned ${mention.displayName} from ${message.guild.name} for ${reson}`))
-			.catch(console.error);
-		message.channel.send(`banned ${mention.displayName} for ${reson}`)
-
+		if (!mention) {
+			id.send(` you have ben banned from ${message.guild.name} for ${reson}`)
+			guild.members.ban(id({
+					days: bdays,
+					reason: `${reson}`
+				}))
+				.then(() => console.log(`banned ${id.tag} from ${message.guild.name} for ${reson}`))
+				.catch(console.error);
+			message.channel.send(`banned ${id.tag} for ${reson}`)
+		} else {
+			mention.send(` you have ben banned from ${message.guild.name} for ${reson}`)
+			mention.ban({
+					days: bdays,
+					reason: `${reson}`
+				})
+				.then(() => console.log(`banned ${mention.displayName} from ${message.guild.name} for ${reson}`))
+				.catch(console.error);
+			message.channel.send(`banned ${mention.displayName} for ${reson}`)
+		}
 	} else if (command.startsWith(`${prefix}unban`)) {
 		const reson = args[3]
 		const buser = args[1]
+		const id = client.users.cache.get(args[1])
 		const whokick = mention;
 		const guild = message.guild;
 		if (!message.member.hasPermission(`BAN_MEMBERS`, {
@@ -768,7 +798,7 @@ client.on('message', async message => {
 					dynamic: true
 				})]
 			});
-			//<${message.author.displayAvatarURL({ format: "png", dynamic: true })}>
+
 		}
 
 		const avatarList = message.mentions.users.map(user => {
@@ -783,18 +813,24 @@ client.on('message', async message => {
 
 		// send the entire array of strings as a message
 		// by default, discord.js will `.join()` the array with `\n`
-		//message.channel.send(avatarList, { files: [message.author.displayAvatarURL({ format: "png", dynamic: true })] });
+		message.channel.send(avatarList, {
+			files: [message.author.displayAvatarURL({
+				format: "png",
+				dynamic: true
+			})]
+		});
 
 	} else if (command.startsWith(`${prefix}ty`)) {
-		if (args[1] = `0`) {
+		//console.log(args[1])
+		if (args[1] === `1`) {
 			message.channel.stopTyping();
 			message.delete()
 
 		}
-		if (args[1] = `1`) {
+		if (args[1] === `0`) {
 			message.channel.startTyping();
 			message.delete()
-		} else return;
+		};
 
 	} else if (command.startsWith(`${prefix}selfdestruct`)) {
 
@@ -998,6 +1034,136 @@ client.on('message', async message => {
 		message.channel.send(widget)
 	} else if (command.startsWith(`${prefix}users`)) {
 		message.channel.send(`${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`)
+	} else if (command.startsWith(`${prefix}lock`)) {
+		var Channels1 = new Discord.Collection()
+		var guild = message.guild;
+		//Channels.set()
+		if (guild.channels.cache.each(channel =>
+				channel.permissionOverwrites("797590702510309407", {
+					VIEW_CHANNEL: true,
+					SEND_MESSAGES: true
+				}))) {
+			var channel = guild.channels
+			Channels1.set(channel.id)
+		}
+		console.log(Channels1.array);
+		//guild.channels.cache.each(channelID => Channels1.set(channelID, channelID.name));
+		//.filter(channelID => channelID === `799868175226765312`).forEach(channelID => console.log(channelID.name, channelID.permissionOverwrites))
+		//message.channel.send(`1`)
+		//var 1 = await message.author.
+		/*
+		rss = {
+			title: String,
+			link: String,
+			content: String
+		}
+		var link = `https://www.youtube.com/feeds/videos.xml?channel_id=UC72FH_bnm5icyGQWHUwRajA`
+		message.channel.send(`https://www.youtube.com/feeds/videos.xml?channel_id=UC72FH_bnm5icyGQWHUwRajA`)
+		console.log(await this.link.items as rss[])
+		*/
+	} else if (command.startsWith(`${prefix}eroles`)) {
+		if (message.author.id === idlist.box) {
+
+
+			//var rust =
+			const eroles = new Discord.MessageEmbed()
+				.setColor('GREEN')
+				.setTitle('get roles')
+				.setURL('http://www.unboxingman.com')
+				.setAuthor('un boxing bot', 'http://play.unboxingman.com/logo.png', 'http://www.unboxingman.com')
+				.setDescription('for name pending')
+				.setThumbnail('http://play.unboxingman.com/logo.png')
+				.addFields(
+
+					{
+						name: `do you play rust?`,
+						value: `then React with <:rust:801911816095531039> `,
+						inline: true
+					}, {
+						name: `do you play VRChat?`,
+						value: `then React with <:vrc:801911815956463697> `,
+						inline: true
+					}, {
+						name: `do you play phasmophobia?`,
+						value: `then React with <:phasmophobia:801911816426094652> `,
+						inline: true
+					}, {
+						name: `do you play Among us?`,
+						value: `then React with <:amongus:801911816090288180> `,
+						inline: true
+					}, {
+						name: `do you play minecraft?`,
+						value: `then React with <:minecraft:804576608639647794> `,
+						inline: true
+					}, {
+						name: `do you play gta5?`,
+						value: `then React with <:gta5:804576606189518938> `,
+						inline: true
+					}, {
+						name: `do you play 7 days to die?`,
+						value: `then React with <:7daystodie:804576608249708544> `,
+						inline: true
+					}, {
+						name: `do you play cod black ops 3?`,
+						value: `then React with <:codblackops3:804576606269866004> `,
+						inline: true
+					}, {
+						name: `do you play left 4 dead 2?`,
+						value: `then React with <:left4dead2:804576607632228363> `,
+						inline: true
+					}, {
+						name: `do you play Roblox?`,
+						value: `then React with <:Roblox:804576607800131674> `,
+						inline: true
+					}, //{	name: `${prefix}`,value: `:)`,},
+				)
+
+			//var mes = client.channels.cache.get(`801910051106717717`);
+			//var mess = await mes.fetch_message(`801915627001479205`)
+			//	await mess.edit(content = eroles)
+
+
+			if (args[1]) {
+				message.channel.messages.fetch(args[1]).then(message => {
+					//	message.react('👍')
+					//message.react('👎');
+					message.edit(eroles)
+				})
+
+			} else {
+
+				var mess = await message.channel.send(eroles);
+				mess.react(`<:rust:801911816095531039>`)
+				mess.react(`<:vrc:801911815956463697>`)
+				mess.react(`<:phasmophobia:801911816426094652>`)
+				mess.react(`<:minecraft:804576608639647794>`)
+				mess.react(`<:gta5:804576606189518938>`)
+				mess.react(`<:7daystodie:804576608249708544>`)
+				mess.react(`<:codblackops3:804576606269866004>`)
+				mess.react(`<:left4dead2:804576607632228363>`)
+				mess.react(`<:Roblox:804576607800131674>`)
+
+
+			}
+		}
+		return message.reply(`you are not unboxing`);
+	} else if (command.startsWith(`${prefix}poll`)) {
+		arg1 = args[1]
+		//mes = 
+		//message.react(arg1)
+		message.channel.messages.fetch(arg1).then(message => {
+			message.react('👍')
+			message.react('👎');
+		})
+
+	} else if (command.startsWith(`${prefix}gleave`)) {
+		if (!message.author.id == idlist.box) return message.channel.send('u are not the bot owner');
+		if (!args[1]) return message.channel.send('no args');
+		var server = bot.guilds.cache.get(args[1])
+
+		server.leave(server.id)
+		message.channel.send(`left server${server.name}`);
+		console.log(`force leve sever ${server.name}`);
 	} else {
 		message.channel.send('You need to enter a valid command!\n try u!help')
 	}
@@ -1090,6 +1256,7 @@ client.on('message', async message => {
 			console.log(sayMessage)
 
 
+
 		} else {
 			message.channel.send('You need to enter a valid command! \n try u!help')
 		}
@@ -1144,6 +1311,7 @@ client.on(`voiceStateUpdate`, async update => {
 
 })
 client.on(`message`, async message => {
+	if (message.channel.type === 'dm') return;
 	if (message.guild.id == `685312384574685186`) {
 		if (message.channel.type === 'news') {
 			message.crosspost()
@@ -1153,6 +1321,7 @@ client.on(`message`, async message => {
 		}
 	}
 })
+
 
 function countdownTimer() {
 	var endDate = new Date('2020-12-25 00:00:00');
@@ -1172,8 +1341,10 @@ function countdownTimer() {
 		//if thhe distance is less thsn 0 (aka, it's already here) sets that
 		if (distance < 0) {
 			clearInterval(timer);
-			console.log('"datePassed" CHRISTMAS IS HERE!!');
-			channle.send('"datePassed" CHRISTMAS IS HERE!!')
+			console.log(`<@everyone>` + `"datePassed" CHRISTMAS IS HERE!!`);
+			channle.send(`<@everyone>` + `"datePassed" CHRISTMAS IS HERE!!`)
+			client.user.setActivity('"datePassed" CHRISTMAS IS HERE!!')
+
 			return;
 		}
 		var days = Math.floor(distance / day);
@@ -1215,7 +1386,34 @@ function verifyPlurals(value, type) {
 		return null;
 	}
 }
+/*
+client.on(`message`, async message => {
 
+	var server = client.guilds.cache.get("804211579607973928");
+	var list = new Array();
+	var guild = message.guild;
+	var name = guild.name.replace(` `, `-`)
+	if (message.guild === server) return;
+	var cat = client.channels.cache.get(`${name}`)
+	if (!list.includes(guild.id)) {
+		server.channels.create(`${name}`, {
+			type: `category`
+		})
+		server.channels.create(`guild-info-${name}`, {
+				type: `text`
+			}).then(channel => channel.send(guild.name + ` ` + guild.id))
+			.then(channel => {
+				channel.setParent(cat)
+			});
+		var ch = client.channels.cache.get(`guild-info-${name}`)
+		var cat = client.channels.cache.get(`${name}`)
+		//ch.setParent(cat.id)
+		bot.logging.set(guild.id, cat.id);
+	}
+
+
+
+})
 /*
 async function execute(message, serverQueue) {
 	const args = message.content.split(' ');

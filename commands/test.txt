@@ -1,5 +1,5 @@
 const db = require('quick.db');
-const { prefix } = require('./mus-config-dev.json');
+const Discord = require('discord.js');
 module.exports = {
 	name: '',
     aliases: ['', ''],

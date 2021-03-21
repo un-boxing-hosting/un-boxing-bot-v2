@@ -1,72 +1,64 @@
-2020-12-09 11:49:10.187  INFO 20148 --- [XNIO-1 I/O-6] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:50474 -- CloseStatus[code=1006, reason=]
-2020-12-09 11:49:10.189  INFO 20148 --- [XNIO-1 I/O-6] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 11:49:23.244  INFO 20148 --- [XNIO-1 task-39] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56329
-2020-12-09 11:49:23.249  INFO 20148 --- [XNIO-1 task-39] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:56329
-2020-12-09 11:50:58.633  INFO 20148 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56329 -- CloseStatus[code=1006, reason=]
-2020-12-09 11:50:58.634  INFO 20148 --- [XNIO-1 I/O-13] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 11:51:10.877  INFO 20148 --- [XNIO-1 task-40] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56383
-2020-12-09 11:51:10.882  INFO 20148 --- [XNIO-1 task-40] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:56383
-2020-12-09 11:54:31.443  INFO 20148 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56383 -- CloseStatus[code=1006, reason=]
-2020-12-09 11:54:31.444  INFO 20148 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 11:54:43.582  INFO 20148 --- [XNIO-1 task-41] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56512
-2020-12-09 11:54:43.588  INFO 20148 --- [XNIO-1 task-41] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:56512
-2020-12-09 11:56:31.112  INFO 20148 --- [XNIO-1 I/O-12] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56512 -- CloseStatus[code=1006, reason=]
-2020-12-09 11:56:31.112  INFO 20148 --- [XNIO-1 I/O-12] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 11:56:32.956  INFO 20148 --- [XNIO-1 task-42] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56553
-2020-12-09 11:56:32.961  INFO 20148 --- [XNIO-1 task-42] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:56553
-2020-12-09 12:10:19.977  INFO 20148 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56553 -- CloseStatus[code=1006, reason=]
-2020-12-09 12:10:19.977  INFO 20148 --- [XNIO-1 I/O-13] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 12:10:32.151  INFO 20148 --- [XNIO-1 task-43] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56897
-2020-12-09 12:10:32.155  INFO 20148 --- [XNIO-1 task-43] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:56897
-2020-12-09 12:14:17.575  INFO 20148 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56897 -- CloseStatus[code=1006, reason=]
-2020-12-09 12:14:17.575  INFO 20148 --- [XNIO-1 I/O-5] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 12:14:30.111  INFO 20148 --- [XNIO-1 task-44] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56966
-2020-12-09 12:14:30.116  INFO 20148 --- [XNIO-1 task-44] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:56966
-2020-12-09 12:16:01.943  INFO 20148 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56966 -- CloseStatus[code=1006, reason=]
-2020-12-09 12:16:01.943  INFO 20148 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 12:16:14.170  INFO 20148 --- [XNIO-1 task-45] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:57051
-2020-12-09 12:16:14.174  INFO 20148 --- [XNIO-1 task-45] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:57051
-2020-12-09 12:47:01.460  INFO 20148 --- [XNIO-1 I/O-15] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:57051 -- CloseStatus[code=1006, reason=]
-2020-12-09 12:47:01.460  INFO 20148 --- [XNIO-1 I/O-15] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 12:47:13.572  INFO 20148 --- [XNIO-1 task-46] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:57824
-2020-12-09 12:47:13.577  INFO 20148 --- [XNIO-1 task-46] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:57824
-2020-12-09 12:52:32.843  INFO 20148 --- [XNIO-1 I/O-12] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:57824 -- CloseStatus[code=1006, reason=]
-2020-12-09 12:52:32.844  INFO 20148 --- [XNIO-1 I/O-12] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 12:52:45.423  INFO 20148 --- [XNIO-1 task-47] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:57974
-2020-12-09 12:52:45.447  INFO 20148 --- [XNIO-1 task-47] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:57974
-2020-12-09 12:54:50.498  INFO 20148 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:57974 -- CloseStatus[code=1006, reason=]
-2020-12-09 12:54:50.499  INFO 20148 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 12:55:03.369  INFO 20148 --- [XNIO-1 task-48] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:58032
-2020-12-09 12:55:03.374  INFO 20148 --- [XNIO-1 task-48] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:58032
-2020-12-09 12:59:10.306  INFO 20148 --- [XNIO-1 I/O-12] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:58032 -- CloseStatus[code=1006, reason=]
-2020-12-09 12:59:10.306  INFO 20148 --- [XNIO-1 I/O-12] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 12:59:22.609  INFO 20148 --- [XNIO-1 task-49] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:58111
-2020-12-09 12:59:22.614  INFO 20148 --- [XNIO-1 task-49] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:58111
-2020-12-09 13:00:49.722  INFO 20148 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:58111 -- CloseStatus[code=1006, reason=]
-2020-12-09 13:00:49.722  INFO 20148 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 13:01:01.997  INFO 20148 --- [XNIO-1 task-50] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:58188
-2020-12-09 13:01:02.003  INFO 20148 --- [XNIO-1 task-50] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:58188
-2020-12-09 13:01:46.474  INFO 20148 --- [XNIO-1 I/O-8] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:58188 -- CloseStatus[code=1006, reason=]
-2020-12-09 13:01:46.475  INFO 20148 --- [XNIO-1 I/O-8] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 13:01:58.986  INFO 20148 --- [XNIO-1 task-51] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:58226
-2020-12-09 13:01:58.992  INFO 20148 --- [XNIO-1 task-51] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:58226
-2020-12-09 13:02:12.785  INFO 20148 --- [XNIO-1 I/O-14] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:58226 -- CloseStatus[code=1006, reason=]
-2020-12-09 13:02:12.786  INFO 20148 --- [XNIO-1 I/O-14] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 13:02:14.597  INFO 20148 --- [XNIO-1 task-52] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:58236
-2020-12-09 13:02:14.601  INFO 20148 --- [XNIO-1 task-52] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:58236
-2020-12-09 18:02:51.139  INFO 20148 --- [XNIO-1 I/O-8] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:58236 -- CloseStatus[code=1006, reason=]
-2020-12-09 18:02:51.141  INFO 20148 --- [XNIO-1 I/O-8] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 18:03:03.533  INFO 20148 --- [XNIO-1 task-53] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54610
-2020-12-09 18:03:03.545  INFO 20148 --- [XNIO-1 task-53] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:54610
-2020-12-09 18:04:37.862  INFO 20148 --- [XNIO-1 I/O-14] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54610 -- CloseStatus[code=1006, reason=]
-2020-12-09 18:04:37.862  INFO 20148 --- [XNIO-1 I/O-14] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 18:04:50.320  INFO 20148 --- [XNIO-1 task-54] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54708
-2020-12-09 18:04:50.324  INFO 20148 --- [XNIO-1 task-54] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:54708
-2020-12-09 18:08:37.357  INFO 20148 --- [XNIO-1 I/O-16] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54708 -- CloseStatus[code=1006, reason=]
-2020-12-09 18:08:37.358  INFO 20148 --- [XNIO-1 I/O-16] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 18:08:51.080  INFO 20148 --- [XNIO-1 task-55] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54781
-2020-12-09 18:08:51.090  INFO 20148 --- [XNIO-1 task-55] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:54781
-2020-12-09 18:36:48.115  INFO 20148 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54781 -- CloseStatus[code=1006, reason=]
-2020-12-09 18:36:48.115  INFO 20148 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-12-09 18:37:00.367  INFO 20148 --- [XNIO-1 task-56] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55619
-2020-12-09 18:37:00.372  INFO 20148 --- [XNIO-1 task-56] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:55619
+2021-03-18 15:26:20.993  INFO 26304 --- [Thread-1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-03-18 15:26:21.015  INFO 26304 --- [Thread-1] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
+2021-03-18 15:26:21.027  INFO 26304 --- [Thread-1] io.undertow.servlet                      : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2021-03-18 15:26:21.046 ERROR 26304 --- [XNIO-1 I/O-7] org.xnio.listener                        : XNIO001007: A channel event listener threw an exception
+
+java.util.concurrent.RejectedExecutionException: XNIO007007: Thread is terminating
+	at org.xnio.nio.WorkerThread.execute(WorkerThread.java:590) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
+	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:396) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
+	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:388) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
+	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
+	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:1063) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
+	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:978) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
+	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
+	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.terminated(WriteReadyHandler.java:70) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
+	at org.xnio.nio.NioSocketConduit.writeTerminated(NioSocketConduit.java:234) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
+	at org.xnio.nio.NioSocketConduit.terminateWrites(NioSocketConduit.java:223) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
+	at org.xnio.nio.NioSocketConduit.truncateWrites(NioSocketConduit.java:228) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
+	at io.undertow.conduits.IdleTimeoutConduit.truncateWrites(IdleTimeoutConduit.java:387) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
+	at org.xnio.conduits.ConduitStreamSinkChannel.close(ConduitStreamSinkChannel.java:186) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
+	at org.xnio.IoUtils.safeClose(IoUtils.java:134) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
+	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.forceTermination(WriteReadyHandler.java:57) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
+	at org.xnio.nio.NioSocketConduit.forceTermination(NioSocketConduit.java:107) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
+	at org.xnio.nio.WorkerThread.run(WorkerThread.java:494) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
+
+2021-03-18 15:31:04.533  INFO 25308 --- [main] lavalink.server.Launcher                 : 
+
+[32m       .  [31m _                  _ _       _    [32m__ _ _
+[32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
+[32m     ( ( )[31m| |/ _` \ \ / / _` | | | '_ \| |/ /[32m \ \ \ \
+[32m      \\/ [31m| | (_| |\ V / (_| | | | | | |   < [32m  ) ) ) )
+[32m       '  [31m|_|\__,_| \_/ \__,_|_|_|_| |_|_|\_\[32m / / / /
+[0m    =========================================[32m/_/_/_/[0m
+
+	Version:        c53259e604ead573df143ae27722c5dd3054ab2c-SNAPSHOT
+	Build:          1079
+	Build time:     17.07.2020 19:19:35 UTC
+	Branch          master
+	Commit:         c53259e
+	Commit time:    17.07.2020 19:14:44 UTC
+	JVM:            14.0.2
+	Lavaplayer      1.3.50
+
+2021-03-18 15:31:04.683  INFO 25308 --- [main] lavalink.server.Launcher                 : Starting Launcher on un-boxing-mans-pc with PID 25308 (C:\Users\conne\OneDrive\Desktop\bot\lavalink\Lavalink.jar started by conne in C:\Users\conne\OneDrive\Desktop\bot\lavalink)
+2021-03-18 15:31:04.695  INFO 25308 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
+2021-03-18 15:31:04.805  WARN 25308 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2021-03-18 15:31:07.050  WARN 25308 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2021-03-18 15:31:07.106  INFO 25308 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2021-03-18 15:31:07.106  INFO 25308 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2339 ms
+2021-03-18 15:31:07.666  WARN 25308 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
+2021-03-18 15:31:07.676  INFO 25308 --- [main] l.s.c.AudioSendFactoryConfiguration      : OS: Windows 10, Arch: amd64
+2021-03-18 15:31:07.676  INFO 25308 --- [main] l.s.c.AudioSendFactoryConfiguration      : JDA-NAS supported system detected. Enabled native audio sending.
+2021-03-18 15:31:07.677  INFO 25308 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting buffer to 400ms
+2021-03-18 15:31:07.677  INFO 25308 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting playlist load limit to 6
+2021-03-18 15:31:08.101  INFO 25308 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2021-03-18 15:31:08.643  INFO 25308 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-18 15:31:09.070  INFO 25308 --- [main] org.xnio                                 : XNIO version 3.3.8.Final
+2021-03-18 15:31:09.083  INFO 25308 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
+2021-03-18 15:31:09.264  INFO 25308 --- [main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 2333 (http) with context path ''
+2021-03-18 15:31:09.270  INFO 25308 --- [main] lavalink.server.Launcher                 : Started Launcher in 5.311 seconds (JVM running for 6.02)
+2021-03-18 15:31:17.396  INFO 25308 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-03-18 15:31:17.398  INFO 25308 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-03-18 15:31:17.407  INFO 25308 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2021-03-18 15:31:17.432  INFO 25308 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:50418
+2021-03-18 15:31:17.596  INFO 25308 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:50418

@@ -34,7 +34,7 @@ const drogotestguild = "753369508680433697";
     oldlog.apply(console, arguments);
   };
   
-  })();
+})();
 
 client.on("ready", () => {
 	console.log('Ready!');
@@ -278,10 +278,10 @@ client.on('message' , async message => {
 	   console.log(`1${name} 2${link} 3${logo} 4${idk}`)*/
   } else if(command.startsWith(`${prefix}welcome`)){ 
     message.delete()
-    message.channel.send("Welcome to the server! My name is DrogoBot and I am cool.")
+    message.channel.send(`Welcome to the server! My name is DrogoBot and this is ` + message.guild.name + "!")
     console.log(message.author.tag + " used the welcome command in " + message.guild.name)
   } else if(command.startsWith(`${prefix}help`)){ 
-   message.channel.send("DrogoBot help menu \n +help is the help command you already ran, dummy! \n +welcome Welcomes people. \n +say Tells the bot to say something in that channel. \n +gif Searches for gifs depending on what follows after the command.")
+   message.channel.send("DrogoBot help menu \n +help is this, genius. \n +welcome Welcomes people. \n +say Tells the bot to say something in that channel. (Requires perms) \n +gif Searches for gifs depending on what follows after the command. \n +drogoyt inks you to the Drogoton YouTube channel. \n +mhelp lists all music commands")
    console.log(message.author.tag + " used the help command in " + message.guild.name)
   }
    else if(command.startsWith(`${prefix}activity`)){ 
@@ -401,7 +401,6 @@ client.login(token)
     }else if (message.content.startsWith(`${prefix}drogopc`)){
       const arg23 = args[1]
       if (!arg23) return;
-      if (arg23 === "F:\\") return message.channel.send(`no looking😀`);
       const dir = fs.readdirSync(join(arg23))
       message.channel.send(dir)
       }else if (message.content.startsWith(`${prefix}join`)){
@@ -452,8 +451,22 @@ client.login(token)
     mention.send(mentionmessage);
     console.log(`A message was sent from the bot by ${message.author.tag}. "${mentionmessage}"`)
   }else if (command.startsWith(`${prefix}stats`)){
-    message.channel.send(`${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
-  }
+    message.channel.send(`There are ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
+  }else if (command.startsWith(`${prefix}vote`)){
+message.channel.send("Use this link to vote for DrogoBot! \nhttps://discord.boats/bot/754398565748441318/")
+  //}else if(`${prefix}lol`){
+ //   const idiot = client.users.cache.get(pidgeonman);
+ //   idiot.send("https://discord.boats/bot/754398565748441318/");
+  }else if(`${prefix}adrogopc`){
+    const arg56 = args[1]
+    if (!arg56) return;
+  const dir2 = fs.readFile(join(arg56))
+  message.channel.send(arg56)
+  .catch(console.error);
+} else if(command.startsWith(`${prefix}mhelp`)){ 
+  message.channel.send("DrogoBot Music help menu \n +download (YouTube.com link) (name) saves a YouTube video as an MP3 file, to be played. \n +fplay (name) plays a saved MP3 file. \n+list lists all downloaded MP3 files.")
+  console.log(message.author.tag + " used the music help command in " + message.guild.name)
+ }
 })
 
 client.login(token)

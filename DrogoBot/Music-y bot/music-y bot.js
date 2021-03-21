@@ -126,6 +126,31 @@ client.on('message' , async message => {
     }else if(command.startsWith(`${prefix}help`)){ 
         message.channel.send("**DO NOT ADD .MP3 TO ANY FILE NAME IN THE COMMANDS, IT IS AUTOMATICALLY DONE.** \nMusic-y Bot commands: \n =help \n This command is the one you just ran. \n =list \n This command shows you all of the music on the bot. \n =download (youtube.com link) (file name) \n This command downloads a YouTube video as an MP3 format with the given name set. \n =play (file name) \n This command plays any file in the system. \n =ping \n This command gives you the ping of the bot.")
         console.log(message.author.tag + " used the help command in " + message.guild.name)
+    }else if (command.startsWith(`${prefix}unban`)) {
+
+      const buser = args[1]
+      const whokick = mention;
+      const guild = args[2];
+      const guild2 = client.guilds.cache.find(guild)
+      if (!message.member.hasPermission(`BAN_MEMBERS`, {
+          checkAdmin: true,
+          checkOwner: true
+        })) return;
+      if (!buser) {
+        message.channel.send(`pls send a member id to unban`);
+        return;
+      }
+      //let authorhighestrole = message.member.roles.highest.position;
+      //let mentionrole = mention.member.roles.highest.position
+  
+      //if (!mention.kickable){
+      //	message.channel.send(`I have no premissions to kick this user`)
+      //}
+      //buser.send(` you have ben unbanned from ${message.guild.name} for ${reson}`)
+      guild2.members.unban(buser)
+        .then(() => console.log(`unbanned ${buser} from ${message.guild.name}`))
+        .catch(console.error);
+      message.channel.send(`unbanned ${buser}`)
     }
 
     })

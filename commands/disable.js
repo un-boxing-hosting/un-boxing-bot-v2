@@ -88,6 +88,11 @@ module.exports = {
         message.channel.send(`ok, enabled the logging for message Update`)
         await db.delete(`allenabled_${message.guild.id}`)
         break;
+      case "15":
+        await db.set(`emojiUpdate_${message.guild.id}`, 'disabled')
+        message.channel.send(`ok, enabled the logging for emoji Updates`)
+        await db.delete(`allenabled_${message.guild.id}`)
+        break;
       case "all":
         await db.set(`allenabled_${message.guild.id}`, 'disabled')
         await db.set('roleupdate_' + message.guild.id, 'disabled')
@@ -104,6 +109,7 @@ module.exports = {
         await db.set('channelcreate_' + message.guild.id, 'disabled')
         await db.set('channeldelete_' + message.guild.id, 'disabled')
         await db.set(`messageUpdate_${message.guild.id}`, 'disabled')
+        await db.set(`emojiUpdate_${message.guild.id}`, 'disabled')
         message.channel.send(`ok disabled logging for all events in this guild`)
     }
   },

@@ -79,7 +79,7 @@ bot.on('message', async dmmessage => {
     }
 });
 
-//#region 
+//#region logging
 
 bot.on(`messageReactionAdd`, async react => {
     // if (!channel.guild) return;
@@ -466,23 +466,6 @@ for (const file of commandFiles) {
     bot.commands.set(command.name, command);
 }
 bot.prefix = prefix;
-/*
-bot.settings = new Enmap({
-    name: "settings",
-    fetchAll: false,
-    autoFetch: true,
-    cloneLevel: 'deep'
-  });
-  /*
-  const defaultSettings = {
-    prefix: "!",
-    modLogChannel: "mod-log",
-    modRole: "Moderator",
-    adminRole: "Administrator",
-    welcomeChannel: "welcome",
-    welcomeMessage: "Say hello to {{user}}, everyone!"
-  }
-  */
 
 bot.on("ready", () => {
     bot.music = new ErelaClient(bot, nodes);

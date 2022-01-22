@@ -21,7 +21,7 @@
     "giphy-js-sdk-core": "^1.0.6",
     "m3u8stream": "^0.6.3",
     "mysql": "^2.17.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.1.1",
     "node-teamspeak-api": "^1.0.0",
     "nodemon": "^2.0.4",
     "overwatch-api": "^0.8.2",

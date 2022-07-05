@@ -5,7 +5,7 @@
   "repository": "github:un-boxing-man/un-boxing-bot-v2",
   "main": "mus.js",
   "dependencies": {
-    "@discordjs/opus": "^0.1.0",
+    "@discordjs/opus": "^0.8.0",
     "affiliate": "^3.0.2",
     "apextab-api": "^1.0.5",
     "async": "^3.2.0",

@@ -16,7 +16,7 @@
     "discord.js": "^12.3.1",
     "enmap": "^5.8.0",
     "erela.js": "^1.1.8",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ffmpeg": "0.0.4",
     "fs": "0.0.1-security",
     "fs-extra": "^9.0.0",
